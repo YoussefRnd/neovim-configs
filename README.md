@@ -16,7 +16,7 @@ This repository holds my personal Neovim configuration, tailored to enhance my c
 
 1. **Clone the repository:**
    ```bash
-   https://github.com/YoussefRnd/neovim-configs.git ~/.config/nvim
+   git clone https://github.com/YoussefRnd/neovim-configs.git ~/.config/nvim
    ```
 
 2. **Install Plugins:**
@@ -29,8 +29,8 @@ This repository holds my personal Neovim configuration, tailored to enhance my c
 ### Windows (PowerShell)
 
 1. **Clone the repository:**
-   ```powershell
-   https://github.com/YoussefRnd/neovim-configs.git $HOME\AppData\Local\nvim
+   ```PowerShell
+   git clone https://github.com/YoussefRnd/neovim-configs.git $HOME\AppData\Local\nvim
    ```
 
 2. **Install Plugins:**
