@@ -2,7 +2,7 @@
 vim.opt.clipboard = 'unnamedplus'   -- use system clipboard 
 vim.opt.completeopt = {'menu', 'menuone', 'noselect'}
 vim.opt.fileencoding = "utf-8"      -- the encoding written to a file
-vim.opt.undofile = true             -- enable persistent undo
+-- vim.opt.undofile = true             -- enable persistent undo
 
 -- Mouse
 vim.opt.mouse = 'a'                 -- allow the mouse to be used in Nvim
