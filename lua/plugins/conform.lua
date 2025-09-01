@@ -29,8 +29,8 @@ return {
       },
     })
 
-    -- Keymap for manual formatting
-    vim.keymap.set({ "n", "v" }, "<leader>mp", function()
+    -- Keymap for manual formatting (following standard convention)
+    vim.keymap.set({ "n", "v" }, "<leader>fm", function()
       conform.format({
         lsp_fallback = true,
         async = false,

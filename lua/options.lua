@@ -19,6 +19,7 @@ vim.opt.ignorecase = true -- ignore case when searching
 vim.opt.inccommand = "nosplit" -- preview incremental substitute
 vim.opt.incsearch = true -- incrementally highlight searches as you type
 vim.opt.laststatus = 3 -- global statusline
+vim.opt.cmdheight = 1 -- height of the command line
 vim.opt.list = true -- show tab characters and trailing whitespace
 vim.opt.mouse = "a" -- enable mouse mode
 vim.opt.number = true -- shows numberline
