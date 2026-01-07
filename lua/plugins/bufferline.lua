@@ -6,7 +6,7 @@ return {
   config = function()
     require("bufferline").setup {
       options = {
-        mode = "buffers", -- set to "tabs" to only show tabpages instead
+        mode = "buffers",
         themable = true,
         numbers = "none",
         close_command = "bdelete! %d",
@@ -14,7 +14,7 @@ return {
         left_mouse_command = "buffer %d",
         middle_mouse_command = nil,
         indicator = {
-          icon = '▎', -- this should be omitted if indicator style is not 'icon'
+          icon = '▎', 
           style = 'icon',
         },
         buffer_close_icon = '󰅖',
@@ -22,6 +22,9 @@ return {
         close_icon = '',
         left_trunc_marker = '',
         right_trunc_marker = '',
+        max_name_length = 18,
+        max_prefix_length = 15,
+        tab_size = 20,
         diagnostics = "nvim_lsp",
         diagnostics_update_in_insert = false,
         offsets = {
@@ -39,7 +42,7 @@ return {
         show_tab_indicators = true,
         show_duplicate_prefix = true,
         persist_buffer_sort = true,
-        separator_style = "slant",
+        separator_style = "thin",
         enforce_regular_tabs = false,
         always_show_bufferline = true,
         hover = {

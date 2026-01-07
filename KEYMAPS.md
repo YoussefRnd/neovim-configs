@@ -11,186 +11,201 @@
 - [LSP & Code Actions](#-lsp--code-actions)
 - [Formatting & Comments](#-formatting--comments)
 - [Diagnostics](#-diagnostics)
+- [Treesitter Textobjects](#-treesitter-textobjects)
 - [Special Features](#-special-features)
 
 ---
 
 ## 🎯 General & Editing
 
-| Keymap      | Mode          | Action        | Description                    |
-| ----------- | ------------- | ------------- | ------------------------------ |
-| `<leader>`  | All           | Leader prefix | Spacebar - your command prefix |
-| `Q`         | Normal        | Disabled      | Ex mode disabled (safety)      |
-| `<leader>y` | Normal/Visual | `"+y`         | Yank to system clipboard       |
-| `<leader>Y` | Normal        | `"+Y`         | Yank line to system clipboard  |
-| `<leader>d` | Normal/Visual | `"_d`         | Delete without yanking         |
-| `<leader>p` | Visual        | `"_dP`        | Paste without losing clipboard |
-| `J`         | Visual        | Move lines    | Move selected lines down       |
-| `K`         | Visual        | Move lines    | Move selected lines up         |
+| Keymap      | Mode          | Description                    |
+| ----------- | ------------- | ------------------------------ |
+| `<Esc>`     | Normal        | Clear search highlight         |
+| `<leader>q` | Normal        | Quit                           |
+| `<leader>x` | Normal        | Save and quit                  |
+| `Q`         | Normal        | Disabled (Ex mode safety)      |
+| `<leader>y` | Normal/Visual | Yank to system clipboard       |
+| `<leader>Y` | Normal        | Yank line to system clipboard  |
+| `<leader>d` | Normal/Visual | Delete without yanking         |
+| `<leader>p` | Visual        | Paste without losing clipboard |
+| `J`         | Visual        | Move selected lines down       |
+| `K`         | Visual        | Move selected lines up         |
+
+### Centered Navigation
+
+| Keymap  | Description                      |
+| ------- | -------------------------------- |
+| `<C-d>` | Scroll down (cursor centered)    |
+| `<C-u>` | Scroll up (cursor centered)      |
+| `n`     | Next search result (centered)    |
+| `N`     | Previous search result (centered)|
 
 ## 📄 Buffer Management
 
-| Keymap       | Mode   | Action       | Description                |
-| ------------ | ------ | ------------ | -------------------------- |
-| `<S-h>`      | Normal | `:bprevious` | Previous buffer (fast)     |
-| `<S-l>`      | Normal | `:bnext`     | Next buffer (fast)         |
-| `<leader>bp` | Normal | `:bprevious` | Previous buffer (mnemonic) |
-| `<leader>bn` | Normal | `:bnext`     | Next buffer (mnemonic)     |
-| `<leader>bd` | Normal | `:bdelete`   | Close current buffer       |
+| Keymap       | Description                |
+| ------------ | -------------------------- |
+| `<S-h>`      | Previous buffer (fast)     |
+| `<S-l>`      | Next buffer (fast)         |
+| `<leader>bp` | Previous buffer            |
+| `<leader>bn` | Next buffer                |
+| `<leader>bd` | Close current buffer       |
+| `<leader>bo` | Close other buffers        |
 
 ## 🪟 Window Management
 
 ### Navigation
 
-| Keymap  | Mode   | Action   | Description          |
-| ------- | ------ | -------- | -------------------- |
-| `<C-h>` | Normal | `<C-w>h` | Move to left window  |
-| `<C-j>` | Normal | `<C-w>j` | Move to window below |
-| `<C-k>` | Normal | `<C-w>k` | Move to window above |
-| `<C-l>` | Normal | `<C-w>l` | Move to right window |
+| Keymap  | Description          |
+| ------- | -------------------- |
+| `<C-h>` | Move to left window  |
+| `<C-j>` | Move to window below |
+| `<C-k>` | Move to window above |
+| `<C-l>` | Move to right window |
 
 ### Management
 
-| Keymap       | Mode   | Action   | Description               |
-| ------------ | ------ | -------- | ------------------------- |
-| `<leader>w`  | Normal | `<C-w>`  | Window command prefix     |
-| `<leader>wv` | Normal | `<C-w>v` | Split window vertically   |
-| `<leader>ws` | Normal | `<C-w>s` | Split window horizontally |
-| `<leader>we` | Normal | `<C-w>=` | Make splits equal size    |
-| `<leader>wx` | Normal | `<C-w>c` | Close current split       |
+| Keymap       | Description               |
+| ------------ | ------------------------- |
+| `<leader>wv` | Split window vertically   |
+| `<leader>ws` | Split window horizontally |
+| `<leader>we` | Make splits equal size    |
+| `<leader>wx` | Close current split       |
 
 ### Resizing
 
-| Keymap      | Mode   | Action               | Description            |
-| ----------- | ------ | -------------------- | ---------------------- |
-| `<C-Up>`    | Normal | `resize +2`          | Increase window height |
-| `<C-Down>`  | Normal | `resize -2`          | Decrease window height |
-| `<C-Left>`  | Normal | `vertical resize -2` | Decrease window width  |
-| `<C-Right>` | Normal | `vertical resize +2` | Increase window width  |
+| Keymap      | Description            |
+| ----------- | ---------------------- |
+| `<C-Up>`    | Increase window height |
+| `<C-Down>`  | Decrease window height |
+| `<C-Left>`  | Decrease window width  |
+| `<C-Right>` | Increase window width  |
 
 ## 📁 File Operations
 
 ### File Tree (NvimTree)
 
-| Keymap      | Mode   | Action                    | Description             |
-| ----------- | ------ | ------------------------- | ----------------------- |
-| `<leader>e` | Normal | `:NvimTreeFindFileToggle` | Toggle file tree        |
-| `<C-n>`     | Normal | `:NvimTreeFindFileToggle` | Toggle file tree (fast) |
+| Keymap      | Description             |
+| ----------- | ----------------------- |
+| `<leader>e` | Toggle file tree        |
+| `<C-n>`     | Toggle file tree (fast) |
 
 ### File Search (Telescope)
 
-| Keymap       | Mode   | Action        | Description                |
-| ------------ | ------ | ------------- | -------------------------- |
-| `<leader>ff` | Normal | `find_files`  | Find files                 |
-| `<leader>fg` | Normal | `live_grep`   | Search text in files       |
-| `<leader>fb` | Normal | `buffers`     | Find open buffers          |
-| `<leader>fh` | Normal | `help_tags`   | Search help documentation  |
-| `<leader>fo` | Normal | `oldfiles`    | Find recently opened files |
-| `<leader>fc` | Normal | `git_commits` | Browse git commits         |
-| `<C-p>`      | Normal | `find_files`  | Find files (fast)          |
-| `<C-f>`      | Normal | `live_grep`   | Live grep (fast)           |
+| Keymap       | Description                |
+| ------------ | -------------------------- |
+| `<leader>ff` | Find files                 |
+| `<leader>fg` | Live grep (search text)    |
+| `<leader>fb` | Find open buffers          |
+| `<leader>fh` | Search help documentation  |
+| `<leader>fo` | Find recently opened files |
+| `<leader>fc` | Browse git commits         |
+| `<leader>fd` | Find diagnostics           |
+| `<leader>fs` | Find document symbols      |
+| `<leader>fk` | Find keymaps               |
+| `<C-p>`      | Find files (fast)          |
 
 ## 🔧 LSP & Code Actions
 
-### Navigation
+### Navigation (g prefix)
 
-| Keymap | Mode   | Action                 | Description              |
-| ------ | ------ | ---------------------- | ------------------------ |
-| `gd`   | Normal | `lsp_definitions`      | Go to definition         |
-| `gD`   | Normal | `declaration`          | Go to declaration        |
-| `gR`   | Normal | `lsp_references`       | Show references          |
-| `gi`   | Normal | `lsp_implementations`  | Go to implementation     |
-| `gt`   | Normal | `lsp_type_definitions` | Go to type definition    |
-| `K`    | Normal | `hover`                | Show hover documentation |
+| Keymap | Description              |
+| ------ | ------------------------ |
+| `gd`   | Go to definition         |
+| `gD`   | Go to declaration        |
+| `gr`   | Go to references         |
+| `gi`   | Go to implementation     |
+| `gy`   | Go to type definition    |
+| `K`    | Hover documentation      |
 
-### Code Actions
+### Actions (leader-l prefix)
 
-| Keymap       | Mode          | Action        | Description        |
-| ------------ | ------------- | ------------- | ------------------ |
-| `<leader>ca` | Normal/Visual | `code_action` | Show code actions  |
-| `<leader>rn` | Normal        | `rename`      | Rename symbol      |
-| `<leader>rs` | Normal        | `:LspRestart` | Restart LSP server |
+| Keymap       | Description        |
+| ------------ | ------------------ |
+| `<leader>la` | Code action        |
+| `<leader>lr` | Rename symbol      |
+| `<leader>ld` | Line diagnostics   |
+| `<leader>lD` | Buffer diagnostics |
+| `<leader>ls` | Restart LSP        |
+| `<leader>li` | LSP info           |
+| `<leader>lk` | Signature help     |
 
 ## ✨ Formatting & Comments
 
-### Formatting
-
-| Keymap        | Mode          | Action           | Description                        |
-| ------------- | ------------- | ---------------- | ---------------------------------- |
-| `<leader>fm`  | Normal/Visual | `conform.format` | Format file/selection              |
-| _Auto-format_ | -             | _On save_        | _Automatic formatting when saving_ |
-
-### Comments
-
-| Keymap      | Mode          | Action           | Description           |
-| ----------- | ------------- | ---------------- | --------------------- |
-| `<leader>/` | Normal/Visual | `:CommentToggle` | Toggle comment        |
-| `<C-/>`     | Normal/Visual | `:CommentToggle` | Toggle comment (fast) |
+| Keymap       | Mode          | Description                |
+| ------------ | ------------- | -------------------------- |
+| `<leader>fm` | Normal/Visual | Format file/selection      |
+| `<leader>/`  | Normal/Visual | Toggle comment             |
+| `<C-/>`      | Normal/Visual | Toggle comment (fast)      |
 
 ## 🩺 Diagnostics
 
-| Keymap       | Mode   | Action        | Description               |
-| ------------ | ------ | ------------- | ------------------------- |
-| `<leader>ld` | Normal | `open_float`  | Show diagnostic details   |
-| `<leader>D`  | Normal | `diagnostics` | Show buffer diagnostics   |
-| `[d`         | Normal | `goto_prev`   | Go to previous diagnostic |
-| `]d`         | Normal | `goto_next`   | Go to next diagnostic     |
+| Keymap | Description               |
+| ------ | ------------------------- |
+| `[d`   | Go to previous diagnostic |
+| `]d`   | Go to next diagnostic     |
+
+## 🧭 Treesitter Textobjects
+
+### Selection
+
+| Keymap | Description           |
+| ------ | --------------------- |
+| `vaf`  | Select around function|
+| `vif`  | Select inside function|
+| `vac`  | Select around class   |
+| `vic`  | Select inside class   |
+| `vaa`  | Select around argument|
+| `via`  | Select inside argument|
+
+### Navigation
+
+| Keymap | Description             |
+| ------ | ----------------------- |
+| `]m`   | Next function start     |
+| `[m`   | Previous function start |
+| `]]`   | Next class start        |
+| `[[`   | Previous class start    |
+
+### Swap
+
+| Keymap      | Description             |
+| ----------- | ----------------------- |
+| `<leader>a` | Swap with next argument |
+| `<leader>A` | Swap with prev argument |
 
 ## 🚀 Special Features
 
 ### Markdown
 
-| Keymap       | Mode   | Action                   | Description                    |
-| ------------ | ------ | ------------------------ | ------------------------------ |
-| `<leader>md` | Normal | `:MarkdownPreviewToggle` | Toggle markdown preview        |
-| `<F12>`      | Normal | `:MarkdownPreviewToggle` | Toggle markdown preview (fast) |
+| Keymap       | Description             |
+| ------------ | ----------------------- |
+| `<leader>md` | Toggle markdown preview |
+| `<F12>`      | Toggle markdown preview |
 
-### Session Management
+### Dashboard (Alpha)
 
-| Keymap | Mode | Action                 | Description                    |
-| ------ | ---- | ---------------------- | ------------------------------ |
-| _Auto_ | -    | _Session save/restore_ | _Automatic session management_ |
-
----
-
-## 💡 Tips & Patterns
-
-### 🎨 Keymap Patterns
-
-- **`<leader>f*`** - File operations (find, grep, etc.)
-- **`<leader>w*`** - Window operations
-- **`<leader>b*`** - Buffer operations
-- **`<leader>l*`** - LSP/Language operations
-- **`<C-*>`** - Fast access shortcuts
-- **`<S-*>`** - Shift shortcuts for navigation
-
-### 🏃‍♂️ Fast Access Shortcuts
-
-- `<C-h/j/k/l>` - Window navigation
-- `<S-h/l>` - Buffer navigation
-- `<C-p>` - Find files
-- `<C-f>` - Live grep
-- `<C-n>` - File tree
-- `<C-/>` - Comment toggle
-
-### 🧠 Memory Aids
-
-- **f** = **F**ind (files, grep, buffers)
-- **w** = **W**indow (split, resize, navigate)
-- **b** = **B**uffer (next, previous, delete)
-- **c** = **C**ode (actions, rename)
-- **d** = **D**iagnostics (errors, warnings)
-- **l** = **L**SP (language server)
-- **e** = **E**xplorer (file tree)
-
-### ⚡ Pro Tips
-
-1. **Use the fast shortcuts** (`<C-*>`, `<S-*>`) for frequently used actions
-2. **Use mnemonic shortcuts** (`<leader>*`) when learning or for precision
-3. **Visual mode** works with formatting (`<leader>fm`) and comments (`<leader>/`)
-4. **Auto-format on save** is enabled - just save your files!
-5. **Session restoration** happens automatically when you open Neovim
+| Key | Description    |
+| --- | -------------- |
+| `f` | Find file      |
+| `n` | New file       |
+| `r` | Recent files   |
+| `g` | Find text      |
+| `c` | Configuration  |
+| `s` | Restore session|
+| `l` | Lazy           |
+| `q` | Quit           |
 
 ---
 
-_Generated for Neovim configuration - Keep this handy for quick reference!_ 🎯
+## 💡 Keymap Patterns
+
+- **`<leader>f*`** — Find operations (files, grep, buffers)
+- **`<leader>l*`** — LSP operations (actions, rename, diagnostics)
+- **`<leader>b*`** — Buffer operations
+- **`<leader>w*`** — Window operations
+- **`g*`** — Go to (definitions, references)
+- **`[` / `]`** — Previous / Next navigation
+
+---
+
+_Updated for Neovim configuration_ 🎯

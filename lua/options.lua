@@ -8,13 +8,13 @@ vim.opt.completeopt = "menu,menuone,noselect"
 vim.opt.conceallevel = 2 -- hide * markup for bold and italic in markdown
 vim.opt.confirm = true -- confirm to save changes before exiting modified buffer
 vim.opt.cursorline = true -- highlight the current line
-vim.opt.encoding = "utf-8" -- set encoding
+-- vim.opt.encoding = "utf-8" -- Not needed, Neovim defaults to UTF-8
 vim.opt.expandtab = true -- convert tabs to spaces
 vim.opt.fillchars = { eob = " " } -- show empty lines at the end of a buffer as clear lines
 vim.opt.formatoptions = "jcroqlnt" -- tcqj
 vim.opt.grepformat = "%f:%l:%c:%m"
 vim.opt.grepprg = "rg --vimgrep"
-vim.opt.hlsearch = false -- do not highlight all matches on previous search pattern
+vim.opt.hlsearch = true -- highlight matches (use <Esc> to clear)
 vim.opt.ignorecase = true -- ignore case when searching
 vim.opt.inccommand = "nosplit" -- preview incremental substitute
 vim.opt.incsearch = true -- incrementally highlight searches as you type
@@ -50,6 +50,8 @@ vim.opt.updatetime = 200 -- faster completion
 vim.opt.wildmode = "longest:full,full" -- command-line completion mode
 vim.opt.winminwidth = 5 -- minimum window width
 vim.opt.wrap = false -- disable line wrap
+vim.opt.splitkeep = "screen" -- keep screen position when splitting
+vim.opt.smoothscroll = true -- smooth scrolling (Neovim 0.10+)
 
 vim.api.nvim_create_autocmd("BufReadPost", {
     pattern = "*",
