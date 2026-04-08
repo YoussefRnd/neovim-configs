@@ -17,9 +17,8 @@ return {
         conditionals = { "italic" },
       },
       integrations = {
-        cmp = true,
+        blink_cmp = true,
         gitsigns = true,
-        nvimtree = true,
         treesitter = true,
         telescope = { enabled = true },
         noice = true,
