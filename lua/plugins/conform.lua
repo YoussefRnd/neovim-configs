@@ -3,6 +3,7 @@ return {
   event = { "BufReadPre", "BufNewFile" },
   config = function()
     local conform = require("conform")
+    local format_opts = { lsp_format = "fallback", timeout_ms = 1000 }
 
     conform.setup({
       formatters_by_ft = {
@@ -22,20 +23,11 @@ return {
         c = { "clang_format" },
         cpp = { "clang_format" },
       },
-      format_on_save = {
-        lsp_fallback = true,
-        async = false,
-        timeout_ms = 1000,
-      },
+      format_on_save = format_opts,
     })
 
-    -- Keymap for manual formatting (following standard convention)
     vim.keymap.set({ "n", "v" }, "<leader>fm", function()
-      conform.format({
-        lsp_fallback = true,
-        async = false,
-        timeout_ms = 1000,
-      })
-    end, { desc = "Format file or range (in visual mode)" })
+      conform.format(format_opts)
+    end, { desc = "Format file or range" })
   end,
 }

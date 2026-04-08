@@ -13,7 +13,6 @@ return {
         "html", "css", "markdown", "markdown_inline",
         "bash", "regex", "python", "go", "rust"
       },
-      sync_install = false,
       auto_install = true,
       highlight = { enable = true },
       indent = { enable = true },

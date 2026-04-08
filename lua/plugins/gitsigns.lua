@@ -10,21 +10,12 @@ return {
       changedelete = { text = "~" },
       untracked = { text = "┆" },
     },
-    signs_staged_enable = true,
-    signcolumn = true,
-    numhl = false,
-    linehl = false,
-    word_diff = false,
-    watch_gitdir = { interval = 1000 },
-    attach_to_untracked = true,
-    current_line_blame = false, -- Toggle with <leader>gb
+    current_line_blame = false,
     current_line_blame_opts = {
-      virt_text = true,
-      virt_text_pos = "eol",
       delay = 500,
     },
     on_attach = function(bufnr)
-      local gs = package.loaded.gitsigns
+      local gs = require("gitsigns")
 
       local function map(mode, l, r, opts)
         opts = opts or {}
@@ -45,7 +36,7 @@ return {
         return "<Ignore>"
       end, { expr = true, desc = "Previous git hunk" })
 
-      -- Actions (leader-g prefix for git)
+      -- Actions
       map("n", "<leader>gs", gs.stage_hunk, { desc = "Stage hunk" })
       map("n", "<leader>gr", gs.reset_hunk, { desc = "Reset hunk" })
       map("v", "<leader>gs", function() gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") }) end, { desc = "Stage hunk" })
