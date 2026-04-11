@@ -73,7 +73,6 @@ return {
           map({ "n", "v" }, "<leader>la", vim.lsp.buf.code_action,  "Code action")
           map("n", "<leader>lr", vim.lsp.buf.rename,                 "Rename symbol")
           map("n", "<leader>ld", vim.diagnostic.open_float,          "Line diagnostics")
-          map("n", "<leader>lD", "<cmd>Telescope diagnostics bufnr=0<CR>", "Buffer diagnostics")
           map("n", "<leader>ls", "<cmd>LspRestart<CR>",              "Restart LSP")
           map("n", "<leader>li", "<cmd>checkhealth lsp<CR>",         "LSP health")
           map("n", "K",          vim.lsp.buf.hover,                  "Hover documentation")

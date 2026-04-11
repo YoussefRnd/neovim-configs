@@ -1,6 +1,10 @@
 return {
   "rmagatti/auto-session",
   lazy = false,
+  keys = {
+    { "<leader>ss", "<cmd>SessionSave<CR>",    desc = "Save session" },
+    { "<leader>sr", "<cmd>SessionRestore<CR>", desc = "Restore session" },
+  },
   opts = {
     suppressed_dirs = { "~/", "~/Downloads", "/" },
   },
