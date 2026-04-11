@@ -81,6 +81,21 @@ return {
           -- Diagnostics navigation
           map("n", "[d", vim.diagnostic.goto_prev, "Previous diagnostic")
           map("n", "]d", vim.diagnostic.goto_next, "Next diagnostic")
+
+          -- Document highlight (replaces vim-illuminate)
+          if client and client:supports_method("textDocument/documentHighlight") then
+            local group = vim.api.nvim_create_augroup("lsp_document_highlight_" .. bufnr, { clear = true })
+            vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+              buffer = bufnr,
+              group = group,
+              callback = vim.lsp.buf.document_highlight,
+            })
+            vim.api.nvim_create_autocmd("CursorMoved", {
+              buffer = bufnr,
+              group = group,
+              callback = vim.lsp.buf.clear_references,
+            })
+          end
         end,
       })
 
@@ -161,15 +176,17 @@ return {
         },
       })
 
-      -- Enable servers
-      vim.lsp.enable({ "clangd", "ts_ls", "lua_ls" })
-
-      -- Ensure servers are installed
+      -- Ensure servers are installed; auto-enable any server mason installs
       require("mason-lspconfig").setup({
         ensure_installed = {
           "clangd",
           "ts_ls",
           "lua_ls",
+        },
+        handlers = {
+          function(server_name)
+            vim.lsp.enable(server_name)
+          end,
         },
       })
     end,

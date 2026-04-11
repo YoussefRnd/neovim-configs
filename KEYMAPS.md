@@ -32,12 +32,12 @@
 
 | Keymap | Mode          | Description                          |
 | ------ | ------------- | ------------------------------------ |
-| `s`    | Normal/Visual | Jump to any visible character        |
-| `S`    | Normal/Visual | Jump using treesitter node           |
-| `r`    | Operator      | Remote flash (act on distant object) |
-| `R`    | Operator/Visual | Treesitter search                  |
+| `gs`   | Normal/Visual/Op | Jump to any visible character     |
+| `gS`   | Normal/Visual/Op | Jump using treesitter node        |
+| `r`    | Operator         | Remote flash (act on distant obj) |
+| `R`    | Operator/Visual  | Treesitter search                 |
 
-> **Workflow:** `s` → type 2 chars → jump. Faster than `f`/`t` for long-range moves.
+> **Workflow:** `gs` → type 2 chars → jump. Faster than `f`/`t` for long-range moves.
 
 ---
 
@@ -234,20 +234,6 @@
 
 ---
 
-## Dashboard (Alpha — startup screen)
-
-| Key | Description      |
-| --- | ---------------- |
-| `f` | Find file        |
-| `n` | New file         |
-| `r` | Recent files     |
-| `g` | Find text        |
-| `c` | Configuration    |
-| `s` | Restore session  |
-| `l` | Lazy             |
-| `q` | Quit             |
-
----
 
 ## Namespace Reference
 
