@@ -82,7 +82,7 @@
 
 ## 📁 File Operations
 
-### File Tree (NvimTree)
+### File Explorer (Oil)
 
 | Keymap      | Description             |
 | ----------- | ----------------------- |

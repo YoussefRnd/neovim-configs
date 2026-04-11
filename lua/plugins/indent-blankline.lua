@@ -6,7 +6,7 @@ return {
     indent = { char = "│" },
     scope = { enabled = true },
     exclude = {
-      filetypes = { "help", "alpha", "dashboard", "NvimTree", "lazy", "mason" },
+      filetypes = { "help", "alpha", "dashboard", "lazy", "mason" },
     },
   },
 }
