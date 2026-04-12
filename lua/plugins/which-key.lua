@@ -25,6 +25,7 @@ return {
       { "<leader>p",  desc = "Paste without losing clipboard" },
       { "<leader>a",  desc = "Swap next argument" },
       { "<leader>A",  desc = "Swap previous argument" },
+      { "<leader>fC", desc = "Find colorscheme" },
     },
   },
 }
