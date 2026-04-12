@@ -1,10 +1,18 @@
+local function toggle_oil()
+  if vim.bo.filetype == "oil" then
+    vim.cmd("bd")
+  else
+    require("oil").open()
+  end
+end
+
 return {
   "stevearc/oil.nvim",
   lazy = false,
   dependencies = { "nvim-tree/nvim-web-devicons" },
   keys = {
-    { "<leader>e", "<cmd>Oil<CR>", desc = "Open file explorer" },
-    { "<C-n>", "<cmd>Oil<CR>", desc = "Open file explorer (fast)" },
+    { "<leader>e", toggle_oil, desc = "Toggle file explorer" },
+    { "<C-n>", toggle_oil, desc = "Toggle file explorer (fast)" },
   },
   opts = {
     default_file_explorer = true,
@@ -15,5 +23,6 @@ return {
       padding = 2,
       border = "rounded",
     },
+    delete_to_trash = true,
   },
 }

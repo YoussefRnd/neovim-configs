@@ -17,7 +17,7 @@ vim.opt.inccommand = "nosplit"
 vim.opt.jumpoptions = "view"
 vim.opt.laststatus = 3
 vim.opt.list = true
-vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
+vim.opt.listchars = { trail = "·", nbsp = "␣" }
 vim.opt.number = true
 vim.opt.pumblend = 10
 vim.opt.pumheight = 10

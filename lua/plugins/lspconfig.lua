@@ -63,20 +63,23 @@ return {
           end
 
           -- Go to
-          map("n", "gd", "<cmd>Telescope lsp_definitions<CR>",      "Go to definition")
-          map("n", "gD", vim.lsp.buf.declaration,                    "Go to declaration")
-          map("n", "gr", "<cmd>Telescope lsp_references<CR>",        "Go to references")
-          map("n", "gi", "<cmd>Telescope lsp_implementations<CR>",   "Go to implementation")
-          map("n", "gy", "<cmd>Telescope lsp_type_definitions<CR>",  "Go to type definition")
+          map("n", "gd", "<cmd>Telescope lsp_definitions<CR>", "Go to definition")
+          map("n", "gD", vim.lsp.buf.declaration, "Go to declaration")
+          map("n", "gr", "<cmd>Telescope lsp_references<CR>", "Go to references")
+          map("n", "gi", "<cmd>Telescope lsp_implementations<CR>", "Go to implementation")
+          map("n", "gy", "<cmd>Telescope lsp_type_definitions<CR>", "Go to type definition")
 
           -- Actions
-          map({ "n", "v" }, "<leader>la", vim.lsp.buf.code_action,  "Code action")
-          map("n", "<leader>lr", vim.lsp.buf.rename,                 "Rename symbol")
-          map("n", "<leader>ld", vim.diagnostic.open_float,          "Line diagnostics")
-          map("n", "<leader>ls", "<cmd>LspRestart<CR>",              "Restart LSP")
-          map("n", "<leader>li", "<cmd>checkhealth lsp<CR>",         "LSP health")
-          map("n", "K",          vim.lsp.buf.hover,                  "Hover documentation")
-          map("n", "<leader>lk", vim.lsp.buf.signature_help,         "Signature help")
+          map({ "n", "v" }, "<leader>la", vim.lsp.buf.code_action, "Code action")
+          map("n", "<leader>lr", vim.lsp.buf.rename, "Rename symbol")
+          map("n", "<leader>ld", vim.diagnostic.open_float, "Line diagnostics")
+          map("n", "<leader>ls", "<cmd>LspRestart<CR>", "Restart LSP")
+          map("n", "<leader>li", "<cmd>checkhealth lsp<CR>", "LSP health")
+          map("n", "<leader>lh", function()
+            vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr }), { bufnr = bufnr })
+          end, "Toggle inlay hints")
+          map("n", "K", vim.lsp.buf.hover, "Hover documentation")
+          map("n", "<leader>lk", vim.lsp.buf.signature_help, "Signature help")
 
           -- Diagnostics navigation
           map("n", "[d", vim.diagnostic.goto_prev, "Previous diagnostic")

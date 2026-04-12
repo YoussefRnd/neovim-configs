@@ -15,28 +15,28 @@ vim.keymap.set("n", "<leader>Y", [["+Y]], { desc = "Yank line to system clipboar
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = "Delete without yanking" })
 
 -- Buffer management
-vim.keymap.set("n", "<S-l>", "<cmd>bnext<CR>",     { desc = "Next buffer" })
+vim.keymap.set("n", "<S-l>", "<cmd>bnext<CR>", { desc = "Next buffer" })
 vim.keymap.set("n", "<S-h>", "<cmd>bprevious<CR>", { desc = "Previous buffer" })
-vim.keymap.set("n", "<leader>bd", "<cmd>bd<CR>",   { desc = "Close current buffer" })
+vim.keymap.set("n", "<leader>bd", "<cmd>bd<CR>", { desc = "Close current buffer" })
 vim.keymap.set("n", "<leader>bo", "<cmd>%bd|e#|bd#<CR>", { desc = "Close other buffers" })
 
--- Commenting (builtin gc operator, Neovim 0.10+)
-vim.keymap.set("n", "<leader>/", "gcc",  { desc = "Toggle comment", remap = true })
-vim.keymap.set("v", "<leader>/", "gc",   { desc = "Toggle comment", remap = true })
-vim.keymap.set("n", "<C-/>",     "gcc",  { desc = "Toggle comment", remap = true })
-vim.keymap.set("v", "<C-/>",     "gc",   { desc = "Toggle comment", remap = true })
-vim.keymap.set("n", "<C-_>",     "gcc",  { desc = "Toggle comment", remap = true })
-vim.keymap.set("v", "<C-_>",     "gc",   { desc = "Toggle comment", remap = true })
+-- Commenting
+vim.keymap.set("n", "<leader>/", "gcc", { desc = "Toggle comment", remap = true })
+vim.keymap.set("v", "<leader>/", "gc", { desc = "Toggle comment", remap = true })
+vim.keymap.set("n", "<C-/>", "gcc", { desc = "Toggle comment", remap = true })
+vim.keymap.set("v", "<C-/>", "gc", { desc = "Toggle comment", remap = true })
+vim.keymap.set("n", "<C-_>", "gcc", { desc = "Toggle comment", remap = true })
+vim.keymap.set("v", "<C-_>", "gc", { desc = "Toggle comment", remap = true })
 
 -- Move code up and down
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move selection down" })
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move selection up" })
 
 -- Keep cursor centered when scrolling/jumping
-vim.keymap.set("n", "<C-d>", "<C-d>zz",  { desc = "Scroll down (centered)" })
-vim.keymap.set("n", "<C-u>", "<C-u>zz",  { desc = "Scroll up (centered)" })
-vim.keymap.set("n", "n",     "nzzzv",    { desc = "Next search result (centered)" })
-vim.keymap.set("n", "N",     "Nzzzv",    { desc = "Previous search result (centered)" })
+vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Scroll down (centered)" })
+vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Scroll up (centered)" })
+vim.keymap.set("n", "n", "nzzzv", { desc = "Next search result (centered)" })
+vim.keymap.set("n", "N", "Nzzzv", { desc = "Previous search result (centered)" })
 
 -- Window management
 vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Move to left window" })
@@ -49,7 +49,7 @@ vim.keymap.set("n", "<leader>we", "<C-w>=", { desc = "Equal split sizes" })
 vim.keymap.set("n", "<leader>wx", "<C-w>c", { desc = "Close split" })
 
 -- Resize window
-vim.keymap.set("n", "<C-Up>",    "<cmd>resize +2<CR>",          { desc = "Increase window height" })
-vim.keymap.set("n", "<C-Down>",  "<cmd>resize -2<CR>",          { desc = "Decrease window height" })
-vim.keymap.set("n", "<C-Left>",  "<cmd>vertical resize -2<CR>", { desc = "Decrease window width" })
+vim.keymap.set("n", "<C-Up>", "<cmd>resize +2<CR>", { desc = "Increase window height" })
+vim.keymap.set("n", "<C-Down>", "<cmd>resize -2<CR>", { desc = "Decrease window height" })
+vim.keymap.set("n", "<C-Left>", "<cmd>vertical resize -2<CR>", { desc = "Decrease window width" })
 vim.keymap.set("n", "<C-Right>", "<cmd>vertical resize +2<CR>", { desc = "Increase window width" })
