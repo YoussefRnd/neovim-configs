@@ -1,3 +1,22 @@
+local state_file = vim.fn.stdpath("data") .. "/colorscheme"
+
+local function pick_colorscheme()
+  require("telescope.builtin").colorscheme({
+    enable_preview = true,
+    attach_mappings = function(prompt_bufnr)
+      require("telescope.actions").select_default:replace(function()
+        local selection = require("telescope.actions.state").get_selected_entry()
+        require("telescope.actions").close(prompt_bufnr)
+        if selection then
+          vim.cmd.colorscheme(selection.value)
+          vim.fn.writefile({ selection.value }, state_file)
+        end
+      end)
+      return true
+    end,
+  })
+end
+
 return {
   'nvim-telescope/telescope.nvim',
   branch = '0.1.x',
@@ -23,6 +42,7 @@ return {
     { "<leader>fs", "<cmd>Telescope lsp_document_symbols<CR>", desc = "Find symbols" },
     { "<leader>fk", "<cmd>Telescope keymaps<CR>",              desc = "Find keymaps" },
     { "<C-p>",      "<cmd>Telescope find_files<CR>",           desc = "Find files (fast)" },
+    { "<leader>fC", pick_colorscheme,                          desc = "Find colorscheme" },
   },
   config = function()
     local telescope = require("telescope")

@@ -24,3 +24,17 @@ require('lazy').setup("plugins", {
     enabled = false, -- Disable luarocks support
   },
 })
+
+-- Restore saved colorscheme after all plugins load
+vim.api.nvim_create_autocmd("VimEnter", {
+  once = true,
+  callback = function()
+    local state_file = vim.fn.stdpath("data") .. "/colorscheme"
+    if vim.fn.filereadable(state_file) == 1 then
+      local saved = vim.fn.readfile(state_file)[1]
+      if saved and saved ~= "" then
+        pcall(vim.cmd.colorscheme, saved)
+      end
+    end
+  end,
+})
