@@ -17,10 +17,9 @@ return {
   },
 
   -- mason-lspconfig: ensures servers are installed
-  -- neovim/nvim-lspconfig dropped: config uses vim.lsp.config/enable (Neovim 0.11 native API)
   {
     "williamboman/mason-lspconfig.nvim",
-    dependencies = { "williamboman/mason.nvim" },
+    dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig" },
     event = { "BufReadPre", "BufNewFile" },
     config = function()
       -- Diagnostic display
