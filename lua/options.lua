@@ -30,7 +30,7 @@ vim.opt.showcmd = false
 vim.opt.sidescrolloff = 8
 vim.opt.signcolumn = "yes"
 vim.opt.smartcase = true
-vim.opt.smartindent = true
+vim.opt.smartindent = false  -- treesitter handles indentation; smartindent causes double-indent
 vim.opt.smarttab = true
 vim.opt.spelllang = "en_us"
 vim.opt.spelloptions = "camel"
@@ -48,10 +48,15 @@ vim.opt.winminwidth = 5
 vim.opt.wrap = false
 vim.opt.smoothscroll = true
 
+-- Ensure undodir exists so undo persistence never silently fails
+vim.fn.mkdir(vim.fn.stdpath("data") .. "/undodir", "p")
+
 -- Return to last edit position when opening files
 vim.api.nvim_create_autocmd("BufReadPost", {
+  group = vim.api.nvim_create_augroup("restore_cursor", { clear = true }),
   pattern = "*",
   callback = function()
+    if vim.tbl_contains({ "gitcommit", "gitrebase" }, vim.bo.filetype) then return end
     if vim.fn.line("'\"") > 0 and vim.fn.line("'\"") <= vim.fn.line("$") then
       vim.cmd("normal! g`\"")
     end

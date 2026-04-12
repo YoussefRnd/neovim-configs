@@ -6,8 +6,8 @@ return {
   config = function()
     require("bufferline").setup({
       options = {
-        close_command = "bdelete! %d",
-        right_mouse_command = "bdelete! %d",
+        close_command = "bdelete %d",
+        right_mouse_command = "bdelete %d",
         left_mouse_command = "buffer %d",
         indicator = {
           icon = "▎",

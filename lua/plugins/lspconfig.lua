@@ -16,10 +16,11 @@ return {
     end,
   },
 
-  -- mason-lspconfig: ensures servers are installed (no handlers needed)
+  -- mason-lspconfig: ensures servers are installed
+  -- neovim/nvim-lspconfig dropped: config uses vim.lsp.config/enable (Neovim 0.11 native API)
   {
     "williamboman/mason-lspconfig.nvim",
-    dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig" },
+    dependencies = { "williamboman/mason.nvim" },
     event = { "BufReadPre", "BufNewFile" },
     config = function()
       -- Diagnostic display
@@ -48,8 +49,9 @@ return {
         },
       })
 
-      -- LSP keymaps via LspAttach (replaces on_attach)
+      -- LSP keymaps via LspAttach (named augroup prevents duplicates on re-source)
       vim.api.nvim_create_autocmd("LspAttach", {
+        group = vim.api.nvim_create_augroup("lsp_keymaps", { clear = true }),
         callback = function(args)
           local bufnr = args.buf
           local client = vim.lsp.get_client_by_id(args.data.client_id)
@@ -74,7 +76,7 @@ return {
           map("n", "<leader>lr", vim.lsp.buf.rename, "Rename symbol")
           map("n", "<leader>ld", vim.diagnostic.open_float, "Line diagnostics")
           map("n", "<leader>ls", "<cmd>LspRestart<CR>", "Restart LSP")
-          map("n", "<leader>li", "<cmd>checkhealth lsp<CR>", "LSP health")
+          map("n", "<leader>li", "<cmd>checkhealth vim.lsp<CR>", "LSP health")
           map("n", "<leader>lh", function()
             vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr }), { bufnr = bufnr })
           end, "Toggle inlay hints")
@@ -102,15 +104,20 @@ return {
         end,
       })
 
-      -- Custom LspRestart command (replaces lspconfig's version)
+      -- LspRestart: uses client.attached_buffers (replaces removed get_buffers_by_client_id)
+      -- Re-triggers FileType autocmd so mason-lspconfig re-enables the server
       vim.api.nvim_create_user_command("LspRestart", function()
         local clients = vim.lsp.get_clients({ bufnr = 0 })
         for _, client in ipairs(clients) do
-          local bufs = vim.lsp.get_buffers_by_client_id(client.id)
+          local bufs = vim.tbl_keys(client.attached_buffers)
           client:stop()
           vim.defer_fn(function()
             for _, buf in ipairs(bufs) do
-              vim.lsp.start(client.config, { bufnr = buf })
+              if vim.api.nvim_buf_is_valid(buf) then
+                vim.api.nvim_buf_call(buf, function()
+                  vim.cmd("doautocmd FileType " .. vim.bo[buf].filetype)
+                end)
+              end
             end
           end, 500)
         end

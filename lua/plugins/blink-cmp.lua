@@ -25,6 +25,12 @@ return {
     },
 
     completion = {
+      accept = {
+        -- Add () after function/method completions (replaces nvim-autopairs cmp integration)
+        auto_brackets = {
+          enabled = true,
+        },
+      },
       documentation = {
         auto_show = true,
         auto_show_delay_ms = 200,
