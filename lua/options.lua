@@ -1,20 +1,9 @@
--- set leader key
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-vim.opt.autowrite = true
-vim.opt.clipboard = "unnamedplus"
-vim.opt.conceallevel = 2
-vim.opt.confirm = true
+-- UI
 vim.opt.cursorline = true
-vim.opt.expandtab = true
 vim.opt.fillchars = { eob = " " }
-vim.opt.formatoptions = "jcroqlnt"
-vim.opt.grepformat = "%f:%l:%c:%m"
-vim.opt.grepprg = "rg --vimgrep"
-vim.opt.ignorecase = true
-vim.opt.inccommand = "nosplit"
-vim.opt.jumpoptions = "view"
 vim.opt.laststatus = 3
 vim.opt.list = true
 vim.opt.listchars = { trail = "·", nbsp = "␣" }
@@ -23,35 +12,56 @@ vim.opt.pumblend = 10
 vim.opt.pumheight = 10
 vim.opt.relativenumber = true
 vim.opt.scrolloff = 8
-vim.opt.shiftwidth = 2
-vim.opt.shortmess:append({ W = true, I = true, c = true, C = true })
-vim.opt.showmode = false
 vim.opt.showcmd = false
+vim.opt.showmode = false
 vim.opt.sidescrolloff = 8
 vim.opt.signcolumn = "yes"
+vim.opt.smoothscroll = true
+vim.opt.winborder = "rounded"
+vim.opt.winminwidth = 5
+vim.opt.wrap = false
+
+-- Editing
+vim.opt.completeopt = "menu,menuone,noselect"
+vim.opt.conceallevel = 2
+vim.opt.expandtab = true
+vim.opt.formatoptions = "jcroqlnt"
+vim.opt.shiftwidth = 2
+vim.opt.smartindent = false -- treesitter handles indentation
+vim.opt.tabstop = 2
+vim.opt.virtualedit = "block"
+
+-- Search
+vim.opt.grepformat = "%f:%l:%c:%m"
+vim.opt.grepprg = "rg --vimgrep"
+vim.opt.ignorecase = true
+vim.opt.inccommand = "nosplit"
 vim.opt.smartcase = true
-vim.opt.smartindent = false  -- treesitter handles indentation; smartindent causes double-indent
-vim.opt.smarttab = true
+
+-- Behavior
+vim.opt.autowrite = true
+vim.opt.clipboard = "unnamedplus"
+vim.opt.confirm = true
+vim.opt.jumpoptions = "view"
+vim.opt.mouse = "a"
+vim.opt.shortmess:append({ W = true, I = true, c = true, C = true })
+vim.opt.splitbelow = true
+vim.opt.splitkeep = "screen"
+vim.opt.splitright = true
+vim.opt.timeoutlen = 300
+vim.opt.updatetime = 200
+
+-- Spell
 vim.opt.spelllang = "en_us"
 vim.opt.spelloptions = "camel"
-vim.opt.splitbelow = true
-vim.opt.splitright = true
-vim.opt.splitkeep = "screen"
-vim.opt.tabstop = 2
-vim.opt.timeoutlen = 300
+
+-- Undo
 vim.opt.undodir = vim.fn.stdpath("data") .. "/undodir"
 vim.opt.undofile = true
 vim.opt.undolevels = 10000
-vim.opt.updatetime = 200
-vim.opt.virtualedit = "block"
-vim.opt.winminwidth = 5
-vim.opt.wrap = false
-vim.opt.smoothscroll = true
-
--- Ensure undodir exists so undo persistence never silently fails
 vim.fn.mkdir(vim.fn.stdpath("data") .. "/undodir", "p")
 
--- Return to last edit position when opening files
+-- Restore cursor position on file open
 vim.api.nvim_create_autocmd("BufReadPost", {
   group = vim.api.nvim_create_augroup("restore_cursor", { clear = true }),
   pattern = "*",
