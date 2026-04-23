@@ -12,7 +12,6 @@ return {
       { "<leader>w",  group = "window" },
       { "<leader>b",  group = "buffer" },
       { "<leader>x",  group = "trouble" },
-      { "<leader>t",  group = "terminal" },
       { "<leader>s",  group = "session" },
       { "<leader>m",  group = "markdown" },
       -- Standalone
