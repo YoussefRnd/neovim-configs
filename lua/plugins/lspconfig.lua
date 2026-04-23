@@ -103,25 +103,6 @@ return {
         end,
       })
 
-      -- LspRestart: uses client.attached_buffers (replaces removed get_buffers_by_client_id)
-      -- Re-triggers FileType autocmd so mason-lspconfig re-enables the server
-      vim.api.nvim_create_user_command("LspRestart", function()
-        local clients = vim.lsp.get_clients({ bufnr = 0 })
-        for _, client in ipairs(clients) do
-          local bufs = vim.tbl_keys(client.attached_buffers)
-          client:stop()
-          vim.defer_fn(function()
-            for _, buf in ipairs(bufs) do
-              if vim.api.nvim_buf_is_valid(buf) then
-                vim.api.nvim_buf_call(buf, function()
-                  vim.cmd("doautocmd FileType " .. vim.bo[buf].filetype)
-                end)
-              end
-            end
-          end, 500)
-        end
-      end, { desc = "Restart LSP clients for current buffer" })
-
       -- Global capabilities (blink.cmp enhances them)
       vim.lsp.config("*", {
         capabilities = require("blink.cmp").get_lsp_capabilities(),
@@ -175,11 +156,21 @@ return {
       vim.lsp.config("lua_ls", {
         settings = {
           Lua = {
+            runtime = {
+              version = "LuaJIT",
+            },
             diagnostics = {
               globals = { "vim" },
             },
+            workspace = {
+              checkThirdParty = false,
+              library = vim.api.nvim_get_runtime_file("", true),
+            },
             completion = {
               callSnippet = "Replace",
+            },
+            telemetry = {
+              enable = false,
             },
           },
         },
@@ -191,11 +182,6 @@ return {
           "clangd",
           "ts_ls",
           "lua_ls",
-        },
-        handlers = {
-          function(server_name)
-            vim.lsp.enable(server_name)
-          end,
         },
       })
     end,
