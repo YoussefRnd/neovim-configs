@@ -15,13 +15,8 @@ return {
     { "<C-n>", toggle_oil, desc = "Toggle file explorer (fast)" },
   },
   opts = {
-    default_file_explorer = true,
     view_options = {
       show_hidden = true,
-    },
-    float = {
-      padding = 2,
-      border = "rounded",
     },
     delete_to_trash = true,
   },

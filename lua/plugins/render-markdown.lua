@@ -8,12 +8,5 @@ return {
   },
   opts = {
     render_modes = { "n" },
-    heading = { enabled = true },
-    code = { enabled = true, style = "full" },
-    dash = { enabled = true },
-    bullet = { enabled = true },
-    checkbox = { enabled = true },
-    table = { enabled = true },
-    link = { enabled = true },
   },
 }

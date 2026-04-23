@@ -11,8 +11,6 @@ return {
     require("ibl").setup({
       indent = { char = "│" },
       scope = {
-        enabled = true,
-        highlight = "IblScope",
         show_start = false,
         show_end = false,
       },
