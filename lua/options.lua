@@ -51,6 +51,9 @@ vim.opt.splitright = true
 vim.opt.timeoutlen = 300
 vim.opt.updatetime = 200
 
+-- Session
+vim.opt.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+
 -- Spell
 vim.opt.spelllang = "en_us"
 vim.opt.spelloptions = "camel"
