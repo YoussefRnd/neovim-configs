@@ -43,10 +43,18 @@ vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Move to left window" })
 vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Move to below window" })
 vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Move to above window" })
 vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Move to right window" })
+vim.keymap.set("t", "<C-h>", "<C-\\><C-n><C-w>h", { desc = "Move to left window" })
+vim.keymap.set("t", "<C-j>", "<C-\\><C-n><C-w>j", { desc = "Move to below window" })
+vim.keymap.set("t", "<C-k>", "<C-\\><C-n><C-w>k", { desc = "Move to above window" })
+vim.keymap.set("t", "<C-l>", "<C-\\><C-n><C-w>l", { desc = "Move to right window" })
 vim.keymap.set("n", "<leader>wv", "<C-w>v", { desc = "Split vertically" })
 vim.keymap.set("n", "<leader>ws", "<C-w>s", { desc = "Split horizontally" })
 vim.keymap.set("n", "<leader>we", "<C-w>=", { desc = "Equal split sizes" })
 vim.keymap.set("n", "<leader>wx", "<C-w>c", { desc = "Close split" })
+
+-- Terminal
+vim.keymap.set("n", "<C-`>", "<cmd>split | terminal<CR><cmd>resize 15<CR>i", { desc = "Open terminal" })
+vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
 -- Resize window
 vim.keymap.set("n", "<C-Up>", "<cmd>resize +2<CR>", { desc = "Increase window height" })
