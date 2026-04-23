@@ -1,28 +1,14 @@
 return {
-  -- Mason: installs LSP servers
-  {
-    "williamboman/mason.nvim",
-    cmd = "Mason",
-    config = function()
-      require("mason").setup({
-        ui = {
-          icons = {
-            package_installed = "✓",
-            package_pending = "➜",
-            package_uninstalled = "✗",
-          },
-        },
-      })
-    end,
-  },
+  { "williamboman/mason.nvim", cmd = "Mason", opts = {} },
 
-  -- mason-lspconfig: ensures servers are installed
   {
-    "williamboman/mason-lspconfig.nvim",
-    dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig" },
+    "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
+    dependencies = {
+      "williamboman/mason.nvim",
+      "williamboman/mason-lspconfig.nvim",
+    },
     config = function()
-      -- Diagnostic display
       vim.diagnostic.config({
         signs = {
           text = {
@@ -32,23 +18,19 @@ return {
             [vim.diagnostic.severity.INFO] = " ",
           },
         },
-        virtual_text = {
-          prefix = "●",
-        },
+        virtual_text = { prefix = "●" },
         update_in_insert = false,
         underline = true,
         severity_sort = true,
         float = {
           focusable = false,
           style = "minimal",
-          border = "rounded",
-          source = "always",
+          source = true,
           header = "",
           prefix = "",
         },
       })
 
-      -- LSP keymaps via LspAttach (named augroup prevents duplicates on re-source)
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("lsp_keymaps", { clear = true }),
         callback = function(args)
@@ -60,10 +42,10 @@ return {
           end
 
           local map = function(mode, key, action, desc)
-            vim.keymap.set(mode, key, action, { noremap = true, silent = true, buffer = bufnr, desc = desc })
+            vim.keymap.set(mode, key, action, { silent = true, buffer = bufnr, desc = desc })
           end
 
-          -- Go to
+          -- Navigation
           map("n", "gd", "<cmd>Telescope lsp_definitions<CR>", "Go to definition")
           map("n", "gD", vim.lsp.buf.declaration, "Go to declaration")
           map("n", "gr", "<cmd>Telescope lsp_references<CR>", "Go to references")
@@ -86,7 +68,7 @@ return {
           map("n", "[d", vim.diagnostic.goto_prev, "Previous diagnostic")
           map("n", "]d", vim.diagnostic.goto_next, "Next diagnostic")
 
-          -- Document highlight (replaces vim-illuminate)
+          -- Document highlight
           if client and client:supports_method("textDocument/documentHighlight") then
             local group = vim.api.nvim_create_augroup("lsp_document_highlight_" .. bufnr, { clear = true })
             vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
@@ -103,12 +85,17 @@ return {
         end,
       })
 
-      -- Global capabilities (blink.cmp enhances them)
+      vim.api.nvim_create_autocmd("LspDetach", {
+        group = vim.api.nvim_create_augroup("lsp_detach", { clear = true }),
+        callback = function(args)
+          vim.api.nvim_del_augroup_by_name("lsp_document_highlight_" .. args.buf)
+        end,
+      })
+
       vim.lsp.config("*", {
         capabilities = require("blink.cmp").get_lsp_capabilities(),
       })
 
-      -- Server-specific configs
       vim.lsp.config("clangd", {
         cmd = {
           "clangd",
@@ -156,33 +143,20 @@ return {
       vim.lsp.config("lua_ls", {
         settings = {
           Lua = {
-            runtime = {
-              version = "LuaJIT",
-            },
-            diagnostics = {
-              globals = { "vim" },
-            },
+            runtime = { version = "LuaJIT" },
+            diagnostics = { globals = { "vim" } },
             workspace = {
               checkThirdParty = false,
-              library = vim.api.nvim_get_runtime_file("", true),
+              library = { vim.env.VIMRUNTIME },
             },
-            completion = {
-              callSnippet = "Replace",
-            },
-            telemetry = {
-              enable = false,
-            },
+            completion = { callSnippet = "Replace" },
+            telemetry = { enable = false },
           },
         },
       })
 
-      -- Ensure servers are installed; auto-enable any server mason installs
       require("mason-lspconfig").setup({
-        ensure_installed = {
-          "clangd",
-          "ts_ls",
-          "lua_ls",
-        },
+        ensure_installed = { "clangd", "ts_ls", "lua_ls" },
       })
     end,
   },
