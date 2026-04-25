@@ -9,7 +9,7 @@ end
 return {
   "stevearc/oil.nvim",
   lazy = false,
-  dependencies = { "nvim-tree/nvim-web-devicons" },
+  dependencies = { "echasnovski/mini.icons" },
   keys = {
     { "<leader>e", toggle_oil, desc = "Toggle file explorer" },
     { "<C-n>",     toggle_oil, desc = "Toggle file explorer (fast)" },
