@@ -10,6 +10,14 @@ return {
         if venv then
           return "  " .. vim.fn.fnamemodify(venv, ":t")
         end
+        local conda = vim.env.CONDA_DEFAULT_ENV
+        if conda and conda ~= "" then
+          return "  " .. conda
+        end
+        local pyenv = vim.env.PYENV_VERSION
+        if pyenv and pyenv ~= "" then
+          return "  " .. pyenv
+        end
         return ""
       end,
       color = { fg = muted },

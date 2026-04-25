@@ -1,6 +1,6 @@
 return {
   "stevearc/conform.nvim",
-  event = { "BufReadPre", "BufNewFile" },
+  event = "BufWritePre",
   config = function()
     local conform = require("conform")
     local format_opts = { lsp_format = "fallback", timeout_ms = 1000 }
@@ -19,6 +19,7 @@ return {
         markdown = { "prettier" },
         graphql = { "prettier" },
         liquid = { "prettier" },
+        python = { "ruff_format" },
         lua = { "stylua" },
         c = { "clang_format" },
         cpp = { "clang_format" },

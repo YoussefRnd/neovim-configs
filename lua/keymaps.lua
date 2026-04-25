@@ -14,8 +14,6 @@ vim.keymap.set("n", "<S-h>", "<cmd>bprevious<CR>", { desc = "Previous buffer" })
 vim.keymap.set("n", "<leader>bd", "<cmd>bd<CR>", { desc = "Close current buffer" })
 vim.keymap.set("n", "<leader>bo", "<cmd>%bd|e#|bd#<CR>", { desc = "Close other buffers" })
 
-vim.keymap.set("n", "<leader>/", "gcc", { desc = "Toggle comment", remap = true })
-vim.keymap.set("v", "<leader>/", "gc", { desc = "Toggle comment", remap = true })
 vim.keymap.set("n", "<C-/>", "gcc", { desc = "Toggle comment", remap = true })
 vim.keymap.set("v", "<C-/>", "gc", { desc = "Toggle comment", remap = true })
 

@@ -12,7 +12,7 @@ return {
   dependencies = { "nvim-tree/nvim-web-devicons" },
   keys = {
     { "<leader>e", toggle_oil, desc = "Toggle file explorer" },
-    { "<C-n>", toggle_oil, desc = "Toggle file explorer (fast)" },
+    { "<C-n>",     toggle_oil, desc = "Toggle file explorer (fast)" },
   },
   opts = {
     view_options = {

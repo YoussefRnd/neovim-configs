@@ -12,7 +12,7 @@ return {
         "c", "cpp", "lua", "vim", "vimdoc", "query",
         "javascript", "typescript", "tsx", "json",
         "html", "css", "markdown", "markdown_inline",
-        "bash", "regex", "python", "go", "rust"
+        "bash", "regex", "python"
       },
       auto_install = true,
       highlight = { enable = true },

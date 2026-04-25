@@ -5,6 +5,10 @@ return {
     "MunifTanjim/nui.nvim",
     "rcarriga/nvim-notify",
   },
+  config = function(_, opts)
+    require("noice").setup(opts)
+    vim.notify = require("notify")
+  end,
   opts = {
     lsp = {
       override = {

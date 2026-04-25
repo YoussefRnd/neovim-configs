@@ -7,5 +7,7 @@ return {
   },
   opts = {
     suppressed_dirs = { "~/", "~/Downloads", "/" },
+    git_use_branch_name = true,
+    bypass_save_filetypes = { "TelescopePrompt", "oil", "lazy", "mason" },
   },
 }

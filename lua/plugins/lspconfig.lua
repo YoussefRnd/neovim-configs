@@ -9,27 +9,65 @@ return {
       "williamboman/mason-lspconfig.nvim",
     },
     config = function()
-      vim.diagnostic.config({
-        signs = {
-          text = {
-            [vim.diagnostic.severity.ERROR] = " ",
-            [vim.diagnostic.severity.WARN] = " ",
-            [vim.diagnostic.severity.HINT] = "󰠠 ",
-            [vim.diagnostic.severity.INFO] = " ",
+      local servers = {
+        clangd = {
+          cmd = {
+            "clangd",
+            "--background-index",
+            "--clang-tidy",
+            "--header-insertion=iwyu",
+            "--completion-style=detailed",
+            "--function-arg-placeholders",
+            "--fallback-style=llvm",
+          },
+          init_options = {
+            usePlaceholders = true,
+            completeUnimported = true,
+            clangdFileStatus = true,
           },
         },
-        virtual_text = { prefix = "●" },
-        update_in_insert = false,
-        underline = true,
-        severity_sort = true,
-        float = {
-          focusable = false,
-          style = "minimal",
-          source = true,
-          header = "",
-          prefix = "",
+        ts_ls = {
+          settings = {
+            typescript = {
+              inlayHints = {
+                includeInlayParameterNameHints = "literal",
+                includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+                includeInlayFunctionParameterTypeHints = true,
+                includeInlayVariableTypeHints = false,
+                includeInlayPropertyDeclarationTypeHints = true,
+                includeInlayFunctionLikeReturnTypeHints = true,
+                includeInlayEnumMemberValueHints = true,
+              },
+            },
+            javascript = {
+              inlayHints = {
+                includeInlayParameterNameHints = "all",
+                includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+                includeInlayFunctionParameterTypeHints = true,
+                includeInlayVariableTypeHints = true,
+                includeInlayPropertyDeclarationTypeHints = true,
+                includeInlayFunctionLikeReturnTypeHints = true,
+                includeInlayEnumMemberValueHints = true,
+              },
+            },
+          },
         },
-      })
+        lua_ls = {
+          settings = {
+            Lua = {
+              runtime = { version = "LuaJIT" },
+              diagnostics = { globals = { "vim" } },
+              workspace = {
+                checkThirdParty = false,
+                library = { vim.env.VIMRUNTIME, vim.fn.stdpath("config") },
+              },
+              completion = { callSnippet = "Replace" },
+              telemetry = { enable = false },
+            },
+          },
+        },
+        pyright = {},
+      }
 
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("lsp_keymaps", { clear = true }),
@@ -88,7 +126,7 @@ return {
       vim.api.nvim_create_autocmd("LspDetach", {
         group = vim.api.nvim_create_augroup("lsp_detach", { clear = true }),
         callback = function(args)
-          vim.api.nvim_del_augroup_by_name("lsp_document_highlight_" .. args.buf)
+          pcall(vim.api.nvim_del_augroup_by_name, "lsp_document_highlight_" .. args.buf)
         end,
       })
 
@@ -96,67 +134,12 @@ return {
         capabilities = require("blink.cmp").get_lsp_capabilities(),
       })
 
-      vim.lsp.config("clangd", {
-        cmd = {
-          "clangd",
-          "--background-index",
-          "--clang-tidy",
-          "--header-insertion=iwyu",
-          "--completion-style=detailed",
-          "--function-arg-placeholders",
-          "--fallback-style=llvm",
-        },
-        init_options = {
-          usePlaceholders = true,
-          completeUnimported = true,
-          clangdFileStatus = true,
-        },
-      })
-
-      vim.lsp.config("ts_ls", {
-        settings = {
-          typescript = {
-            inlayHints = {
-              includeInlayParameterNameHints = "literal",
-              includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-              includeInlayFunctionParameterTypeHints = true,
-              includeInlayVariableTypeHints = false,
-              includeInlayPropertyDeclarationTypeHints = true,
-              includeInlayFunctionLikeReturnTypeHints = true,
-              includeInlayEnumMemberValueHints = true,
-            },
-          },
-          javascript = {
-            inlayHints = {
-              includeInlayParameterNameHints = "all",
-              includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-              includeInlayFunctionParameterTypeHints = true,
-              includeInlayVariableTypeHints = true,
-              includeInlayPropertyDeclarationTypeHints = true,
-              includeInlayFunctionLikeReturnTypeHints = true,
-              includeInlayEnumMemberValueHints = true,
-            },
-          },
-        },
-      })
-
-      vim.lsp.config("lua_ls", {
-        settings = {
-          Lua = {
-            runtime = { version = "LuaJIT" },
-            diagnostics = { globals = { "vim" } },
-            workspace = {
-              checkThirdParty = false,
-              library = { vim.env.VIMRUNTIME },
-            },
-            completion = { callSnippet = "Replace" },
-            telemetry = { enable = false },
-          },
-        },
-      })
+      for name, cfg in pairs(servers) do
+        vim.lsp.config(name, cfg)
+      end
 
       require("mason-lspconfig").setup({
-        ensure_installed = { "clangd", "ts_ls", "lua_ls" },
+        ensure_installed = vim.tbl_keys(servers),
       })
     end,
   },

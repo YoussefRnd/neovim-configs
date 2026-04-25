@@ -15,7 +15,7 @@ return {
     }
 
     -- Named augroup prevents duplicate autocmds if this file is re-sourced
-    vim.api.nvim_create_autocmd({ "BufWritePost", "BufReadPost", "InsertLeave" }, {
+    vim.api.nvim_create_autocmd({ "BufWritePost", "BufReadPost" }, {
       group = vim.api.nvim_create_augroup("nvim_lint", { clear = true }),
       callback = function()
         lint.try_lint()
