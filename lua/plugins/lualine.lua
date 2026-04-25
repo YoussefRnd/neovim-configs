@@ -34,7 +34,6 @@ return {
         lualine_b = { "branch", "diff" },
         lualine_c = { { "filename", path = 1, symbols = { modified = "●", readonly = "", unnamed = "—" } } },
         lualine_x = { env, "diagnostics", "filetype" },
-        lualine_y = {},
         lualine_z = { "location" },
       },
     })

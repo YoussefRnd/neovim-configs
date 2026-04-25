@@ -1,4 +1,4 @@
-local state_file = vim.fn.stdpath("data") .. "/colorscheme"
+local state_file = vim.fn.stdpath("state") .. "/colorscheme"
 
 local function pick_colorscheme()
   require("telescope.builtin").colorscheme({
