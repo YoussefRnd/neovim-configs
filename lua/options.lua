@@ -31,14 +31,6 @@ vim.opt.smartindent = false -- treesitter handles indentation
 vim.opt.tabstop = 2
 vim.opt.virtualedit = "block"
 
-vim.api.nvim_create_autocmd("FileType", {
-  group = vim.api.nvim_create_augroup("markdown_conceal", { clear = true }),
-  pattern = { "markdown" },
-  callback = function()
-    vim.opt_local.conceallevel = 2
-  end,
-})
-
 -- Search
 vim.opt.grepformat = "%f:%l:%c:%m"
 vim.opt.grepprg = "rg --vimgrep"
@@ -93,16 +85,4 @@ vim.diagnostic.config({
     header = "",
     prefix = "",
   },
-})
-
--- Restore cursor position on file open
-vim.api.nvim_create_autocmd("BufReadPost", {
-  group = vim.api.nvim_create_augroup("restore_cursor", { clear = true }),
-  pattern = "*",
-  callback = function()
-    if vim.tbl_contains({ "gitcommit", "gitrebase" }, vim.bo.filetype) then return end
-    if vim.fn.line("'\"") > 0 and vim.fn.line("'\"") <= vim.fn.line("$") then
-      vim.cmd("normal! g`\"")
-    end
-  end,
 })
