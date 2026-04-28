@@ -3,11 +3,14 @@ return {
   version = "*",
   event = { "InsertEnter", "CmdlineEnter" },
   dependencies = {
-    { "L3MON4D3/LuaSnip", version = "v2.*" },
     "rafamadriz/friendly-snippets",
   },
   opts = {
-    snippets = { preset = "luasnip" },
+    snippets = { preset = "default" },
+
+    sources = {
+      default = { "lsp", "path", "snippets", "buffer" },
+    },
 
     keymap = {
       preset = "none",

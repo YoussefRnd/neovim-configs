@@ -1,9 +1,20 @@
+local format_opts = { lsp_format = "fallback", timeout_ms = 1000 }
+
 return {
   "stevearc/conform.nvim",
   event = "BufWritePre",
+  keys = {
+    {
+      "<leader>fm",
+      function()
+        require("conform").format(format_opts)
+      end,
+      mode = { "n", "v" },
+      desc = "Format file or range",
+    },
+  },
   config = function()
     local conform = require("conform")
-    local format_opts = { lsp_format = "fallback", timeout_ms = 1000 }
 
     conform.setup({
       formatters_by_ft = {
@@ -26,9 +37,5 @@ return {
       },
       format_on_save = format_opts,
     })
-
-    vim.keymap.set({ "n", "v" }, "<leader>fm", function()
-      conform.format(format_opts)
-    end, { desc = "Format file or range" })
   end,
 }

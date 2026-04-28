@@ -75,10 +75,6 @@ return {
           local bufnr = args.buf
           local client = vim.lsp.get_client_by_id(args.data.client_id)
 
-          if client and client:supports_method("textDocument/inlayHint") then
-            vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-          end
-
           local map = function(mode, key, action, desc)
             vim.keymap.set(mode, key, action, { silent = true, buffer = bufnr, desc = desc })
           end
