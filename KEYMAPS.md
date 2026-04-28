@@ -111,7 +111,7 @@
 | `<leader>fd`  | Find diagnostics             |
 | `<leader>fs`  | Find document symbols        |
 | `<leader>fk`  | Search all keymaps           |
-| `<leader>ft`  | Find TODOs                   |
+| `<leader>fC`  | Find colorscheme             |
 | `<C-p>`       | Find files (fast)            |
 
 ---
@@ -130,6 +130,7 @@
 | `<leader>lr`  | Rename symbol          |
 | `<leader>ld`  | Line diagnostics float |
 | `<leader>lk`  | Signature help         |
+| `<leader>lh`  | Toggle inlay hints     |
 | `<leader>ls`  | Restart LSP            |
 | `<leader>li`  | LSP health             |
 
@@ -139,12 +140,10 @@
 
 ## Diagnostics
 
-| Keymap       | Description               |
-| ------------ | ------------------------- |
-| `]d`         | Next diagnostic           |
-| `[d`         | Previous diagnostic       |
-| `]t`         | Next TODO                 |
-| `[t`         | Previous TODO             |
+| Keymap       | Description                  |
+| ------------ | ---------------------------- |
+| `]d`         | Next diagnostic              |
+| `[d`         | Previous diagnostic          |
 | `<leader>xx` | Trouble: project diagnostics |
 | `<leader>xb` | Trouble: buffer diagnostics  |
 | `<leader>xs` | Trouble: symbols             |
@@ -188,23 +187,21 @@
 
 ## File Explorer (Oil)
 
-| Keymap      | Description       |
-| ----------- | ----------------- |
-| `<leader>e` | Open file explorer |
-| `<C-n>`     | Open file explorer (fast) |
+| Keymap      | Description                 |
+| ----------- | --------------------------- |
+| `<leader>e` | Toggle file explorer        |
+| `<C-n>`     | Toggle file explorer (fast) |
 
-> Oil opens the filesystem as a buffer — edit filenames, delete, move with normal vim commands then `:w` to apply.
+> Oil is loaded eagerly so the file explorer is always available. It opens the filesystem as a buffer — edit filenames, delete, move with normal Vim commands, then `:w` to apply.
 
 ---
 
-## Terminal — `<leader>t*`
+## Terminal
 
-| Keymap        | Description         |
-| ------------- | ------------------- |
-| `<C-\>`       | Toggle terminal     |
-| `<leader>tf`  | Float terminal      |
-| `<leader>th`  | Horizontal terminal |
-| `<leader>tv`  | Vertical terminal   |
+| Keymap         | Mode     | Description         |
+| -------------- | -------- | ------------------- |
+| ``<C-`>``      | Normal   | Open terminal split |
+| `<Esc><Esc>`   | Terminal | Exit terminal mode  |
 
 ---
 
@@ -245,7 +242,6 @@
 | `<leader>b*`  | Buffer           |
 | `<leader>w*`  | Window           |
 | `<leader>x*`  | Trouble          |
-| `<leader>t*`  | Terminal         |
 | `<leader>s*`  | Session          |
 | `<leader>m*`  | Markdown         |
 | `g*`          | Go to (LSP nav)  |
