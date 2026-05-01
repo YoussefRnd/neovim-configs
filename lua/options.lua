@@ -12,8 +12,6 @@ vim.opt.pumblend = 10
 vim.opt.pumheight = 10
 vim.opt.relativenumber = true
 vim.opt.scrolloff = 8
-vim.opt.showcmd = false
-vim.opt.showmode = false
 vim.opt.sidescrolloff = 8
 vim.opt.signcolumn = "yes"
 vim.opt.smoothscroll = true
@@ -25,7 +23,7 @@ vim.opt.wrap = false
 vim.opt.completeopt = "menu,menuone,noselect"
 vim.opt.conceallevel = 0
 vim.opt.expandtab = true
-vim.opt.formatoptions = "jcroqlnt"
+vim.opt.formatoptions = "jqlnt"
 vim.opt.shiftwidth = 2
 vim.opt.smartindent = false -- treesitter handles indentation
 vim.opt.tabstop = 2
@@ -35,13 +33,11 @@ vim.opt.virtualedit = "block"
 vim.opt.grepformat = "%f:%l:%c:%m"
 vim.opt.grepprg = "rg --vimgrep"
 vim.opt.ignorecase = true
-vim.opt.inccommand = "nosplit"
 vim.opt.smartcase = true
 
 -- Behavior
 vim.opt.autowrite = true
 vim.opt.clipboard = "unnamedplus"
-vim.opt.confirm = true
 vim.opt.jumpoptions = "view"
 vim.opt.mouse = "a"
 vim.opt.shortmess:append({ W = true, I = true, c = true, C = true })

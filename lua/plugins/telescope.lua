@@ -29,6 +29,7 @@ return {
         return vim.fn.executable('make') == 1
       end,
     },
+    'debugloop/telescope-undo.nvim',
   },
   cmd = 'Telescope',
   keys = {
@@ -41,6 +42,7 @@ return {
     { "<leader>fd", "<cmd>Telescope diagnostics<CR>",          desc = "Find diagnostics" },
     { "<leader>fs", "<cmd>Telescope lsp_document_symbols<CR>", desc = "Find symbols" },
     { "<leader>fk", "<cmd>Telescope keymaps<CR>",              desc = "Find keymaps" },
+    { "<leader>fu", "<cmd>Telescope undo<CR>",                 desc = "Find undo history" },
     { "<C-p>",      "<cmd>Telescope find_files<CR>",           desc = "Find files (fast)" },
     { "<leader>fC", pick_colorscheme,                          desc = "Find colorscheme" },
   },
@@ -68,8 +70,18 @@ return {
           },
         },
       },
+      extensions = {
+        undo = {
+          side_by_side = true,
+          layout_strategy = "vertical",
+          layout_config = {
+            preview_height = 0.8,
+          },
+        },
+      },
     })
 
     pcall(telescope.load_extension, "fzf")
+    pcall(telescope.load_extension, "undo")
   end,
 }

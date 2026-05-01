@@ -20,15 +20,6 @@ autocmd("VimEnter", {
   end,
 })
 
--- Use conceal for markdown only, where it improves rendered readability.
-autocmd("FileType", {
-  group = augroup("markdown_conceal", { clear = true }),
-  pattern = { "markdown" },
-  callback = function()
-    vim.opt_local.conceallevel = 2
-  end,
-})
-
 -- Restore cursor position when reopening files.
 autocmd("BufReadPost", {
   group = augroup("restore_cursor", { clear = true }),
