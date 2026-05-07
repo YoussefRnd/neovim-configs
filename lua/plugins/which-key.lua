@@ -4,6 +4,8 @@ return {
   opts = {
     delay = 200,
     icons = { mappings = false },
+    layout = { align = "left", spacing = 2 },
+    win = { border = "rounded" },
     spec = {
       { "<leader>f",  group = "find" },
       { "<leader>g",  group = "git" },

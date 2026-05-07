@@ -5,12 +5,14 @@ return {
   config = function()
     local hooks = require("ibl.hooks")
     hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
-      vim.api.nvim_set_hl(0, "IblScope", { link = "Function" })
+      vim.api.nvim_set_hl(0, "IblIndent", { link = "NonText" })
+      vim.api.nvim_set_hl(0, "IblScope", { link = "Comment" })
     end)
 
     require("ibl").setup({
-      indent = { char = "│" },
+      indent = { char = "│", highlight = "IblIndent" },
       scope = {
+        highlight = "IblScope",
         show_start = false,
         show_end = false,
       },

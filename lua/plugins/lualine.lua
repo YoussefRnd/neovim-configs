@@ -26,14 +26,25 @@ return {
     require("lualine").setup({
       options = {
         component_separators = { left = "", right = "" },
-        section_separators = { left = "", right = "" },
+        disabled_filetypes = { statusline = { "dashboard", "lazy", "mason" } },
         globalstatus = true,
+        theme = "auto",
+        section_separators = { left = "", right = "" },
       },
       sections = {
         lualine_a = { { "mode", fmt = function(s) return s:lower() end } },
         lualine_b = { "branch", "diff" },
         lualine_c = { { "filename", path = 1, symbols = { modified = "●", readonly = "", unnamed = "—" } } },
-        lualine_x = { env, "diagnostics", "filetype" },
+        lualine_x = {
+          env,
+          {
+            "diagnostics",
+            symbols = { error = "E", warn = "W", info = "I", hint = "H" },
+            colored = false,
+            update_in_insert = false,
+          },
+          { "filetype", icons_enabled = true },
+        },
         lualine_z = { "location" },
       },
     })
