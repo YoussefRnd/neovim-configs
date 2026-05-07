@@ -27,9 +27,30 @@ return {
       accept = {
         auto_brackets = { enabled = true },
       },
+      menu = {
+        border = "rounded",
+        winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None",
+      },
       documentation = {
         auto_show = true,
         auto_show_delay_ms = 200,
+        window = {
+          border = "rounded",
+          winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None",
+        },
+      },
+    },
+
+    signature = {
+      window = {
+        border = "rounded",
+        winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None",
+      },
+    },
+
+    fuzzy = {
+      prebuilt_binaries = {
+        download = true,
       },
     },
   },

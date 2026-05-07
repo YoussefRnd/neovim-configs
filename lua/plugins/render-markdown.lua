@@ -4,7 +4,6 @@ return {
   ft = { "markdown" },
   keys = {
     { "<leader>md", "<cmd>RenderMarkdown toggle<CR>", desc = "Toggle markdown render" },
-    { "<F12>",      "<cmd>RenderMarkdown toggle<CR>", desc = "Toggle markdown render" },
   },
   opts = {
     render_modes = { "n" },

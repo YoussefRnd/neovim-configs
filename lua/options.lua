@@ -2,16 +2,18 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 -- UI
+vim.opt.termguicolors = true
 vim.opt.cursorline = true
 vim.opt.fillchars = { eob = " " }
 vim.opt.laststatus = 3
 vim.opt.list = true
-vim.opt.listchars = { trail = "·", nbsp = "␣" }
+vim.opt.listchars = { tab = "▸·", trail = "·", nbsp = "␣", extends = "…", precedes = "…" }
 vim.opt.number = true
 vim.opt.pumblend = 10
 vim.opt.pumheight = 10
 vim.opt.relativenumber = true
 vim.opt.scrolloff = 8
+vim.opt.showmode = false
 vim.opt.sidescrolloff = 8
 vim.opt.signcolumn = "yes"
 vim.opt.smoothscroll = true
@@ -21,11 +23,10 @@ vim.opt.wrap = false
 
 -- Editing
 vim.opt.completeopt = "menu,menuone,noselect"
-vim.opt.conceallevel = 0
 vim.opt.expandtab = true
-vim.opt.formatoptions = "jqlnt"
+vim.opt.formatoptions = "jcroqlnt" -- jcroqlnt is much more robust for wrapping/comments (like LazyVim)
 vim.opt.shiftwidth = 2
-vim.opt.smartindent = false -- treesitter handles indentation
+vim.opt.smartindent = true -- Set to true, treesitter doesn't always handle it
 vim.opt.tabstop = 2
 vim.opt.virtualedit = "block"
 
@@ -37,7 +38,9 @@ vim.opt.smartcase = true
 
 -- Behavior
 vim.opt.autowrite = true
+vim.opt.confirm = true
 vim.opt.clipboard = "unnamedplus"
+vim.opt.inccommand = "nosplit"
 vim.opt.jumpoptions = "view"
 vim.opt.mouse = "a"
 vim.opt.shortmess:append({ W = true, I = true, c = true, C = true })
@@ -62,23 +65,24 @@ vim.fn.mkdir(vim.fn.stdpath("data") .. "/undodir", "p")
 
 -- Diagnostics
 vim.diagnostic.config({
-  signs = {
-    text = {
-      [vim.diagnostic.severity.ERROR] = " ",
-      [vim.diagnostic.severity.WARN] = " ",
-      [vim.diagnostic.severity.HINT] = "󰠠 ",
-      [vim.diagnostic.severity.INFO] = " ",
-    },
-  },
-  virtual_text = { prefix = "●" },
-  update_in_insert = false,
-  underline = true,
-  severity_sort = true,
-  float = {
-    focusable = false,
-    style = "minimal",
-    source = true,
-    header = "",
-    prefix = "",
-  },
+	signs = {
+		text = {
+			[vim.diagnostic.severity.ERROR] = " ",
+			[vim.diagnostic.severity.WARN] = " ",
+			[vim.diagnostic.severity.HINT] = "󰠠 ",
+			[vim.diagnostic.severity.INFO] = " ",
+		},
+	},
+	virtual_text = { prefix = "●" },
+	update_in_insert = false,
+	underline = true,
+	severity_sort = true,
+	float = {
+		focusable = false,
+		style = "minimal",
+		border = "rounded",
+		source = true,
+		header = "",
+		prefix = "",
+	},
 })

@@ -2,26 +2,9 @@ return {
   "nvim-lualine/lualine.nvim",
   dependencies = { "echasnovski/mini.icons" },
   config = function()
-    local muted = "#a59a99"
-
-    local env = {
-      function()
-        local venv = vim.env.VIRTUAL_ENV
-        if venv then
-          return "  " .. vim.fn.fnamemodify(venv, ":t")
-        end
-        local conda = vim.env.CONDA_DEFAULT_ENV
-        if conda and conda ~= "" then
-          return "  " .. conda
-        end
-        local pyenv = vim.env.PYENV_VERSION
-        if pyenv and pyenv ~= "" then
-          return "  " .. pyenv
-        end
-        return ""
-      end,
-      color = { fg = muted },
-    }
+    local function hide_in_width()
+      return vim.fn.winwidth(0) > 80
+    end
 
     require("lualine").setup({
       options = {
@@ -33,19 +16,19 @@ return {
       },
       sections = {
         lualine_a = { { "mode", fmt = function(s) return s:lower() end } },
-        lualine_b = { "branch", "diff" },
+        lualine_b = { { "branch", cond = hide_in_width }, { "diff", cond = hide_in_width } },
         lualine_c = { { "filename", path = 1, symbols = { modified = "●", readonly = "", unnamed = "—" } } },
         lualine_x = {
-          env,
           {
             "diagnostics",
             symbols = { error = "E", warn = "W", info = "I", hint = "H" },
             colored = false,
             update_in_insert = false,
+            cond = hide_in_width,
           },
           { "filetype", icons_enabled = true },
         },
-        lualine_z = { "location" },
+        lualine_z = { { "location", cond = hide_in_width } },
       },
     })
   end,

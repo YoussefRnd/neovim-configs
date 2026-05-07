@@ -1,5 +1,13 @@
 return {
-  { "williamboman/mason.nvim", cmd = "Mason", opts = {} },
+  {
+    "williamboman/mason.nvim",
+    cmd = "Mason",
+    opts = {
+      ui = {
+        border = "rounded",
+      },
+    },
+  },
 
   {
     "neovim/nvim-lspconfig",
@@ -144,6 +152,14 @@ return {
       for name, cfg in pairs(servers) do
         vim.lsp.config(name, cfg)
       end
+
+      -- UI: Rounded borders for LSP handlers
+      vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+        border = "rounded",
+      })
+      vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signatureHelp, {
+        border = "rounded",
+      })
 
       require("mason-lspconfig").setup({
         ensure_installed = vim.tbl_keys(servers),
