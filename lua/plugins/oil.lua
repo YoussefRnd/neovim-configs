@@ -15,6 +15,13 @@ return {
     { "<C-n>",     toggle_oil, desc = "Toggle file explorer (fast)" },
   },
   opts = {
+    float = {
+      border = "rounded",
+      padding = 1,
+      max_width = 0.9,
+      max_height = 0.85,
+      preview_split = "right",
+    },
     view_options = {
       show_hidden = true,
     },

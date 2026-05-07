@@ -16,6 +16,19 @@ return {
         ["vim.lsp.util.stylize_markdown"] = true,
       },
     },
+    views = {
+      cmdline_popup = {
+        border = {
+          style = "rounded",
+          padding = { 0, 1 },
+        },
+      },
+      popupmenu = {
+        border = {
+          style = "rounded",
+        },
+      },
+    },
     presets = {
       bottom_search = true,
       command_palette = true,

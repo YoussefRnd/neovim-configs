@@ -54,6 +54,7 @@ return {
       defaults = {
         path_display = { "truncate" },
         sorting_strategy = "ascending",
+        borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
         layout_config = {
           horizontal = {
             prompt_position = "top",
@@ -76,6 +77,7 @@ return {
           layout_strategy = "vertical",
           layout_config = {
             preview_height = 0.8,
+            border = "rounded",
           },
         },
       },
