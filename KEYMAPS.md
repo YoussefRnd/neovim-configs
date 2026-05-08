@@ -12,6 +12,7 @@
 | ----------- | ----------------- | ------------------------------ |
 | `<C-s>`     | Normal/Insert/Visual | Save file                   |
 | `<leader>q` | Normal            | Quit                           |
+| `<leader>u` | Normal            | Toggle undo tree               |
 | `<Esc>`     | Normal            | Clear search highlight         |
 | `Q`         | Normal            | Disabled (Ex mode safety)      |
 
@@ -49,6 +50,7 @@
 | `<leader>Y`  | Normal        | Yank line to system clipboard  |
 | `<leader>d`  | Normal/Visual | Delete without yanking         |
 | `<leader>p`  | Visual        | Paste without losing clipboard |
+| `<leader>fm` | Normal/Visual | Format file/selection          |
 | `J`          | Visual        | Move selection down            |
 | `K`          | Visual        | Move selection up              |
 | `<leader>/`  | Normal/Visual | Toggle comment                 |
@@ -116,7 +118,7 @@
 
 ---
 
-## LSP — `<leader>l*` and `g*`
+## LSP — `<leader>l*`, `g*`, and diagnostics
 
 | Keymap        | Description            |
 | ------------- | ---------------------- |
@@ -129,28 +131,25 @@
 | `<leader>la`  | Code action            |
 | `<leader>lr`  | Rename symbol          |
 | `<leader>ld`  | Line diagnostics float |
-| `<leader>lk`  | Signature help         |
 | `<leader>lh`  | Toggle inlay hints     |
-| `<leader>ls`  | Restart LSP            |
-| `<leader>li`  | LSP health             |
 
-> **Diagnostic workflow:** `]d` jump to error → `<leader>ld` read detail → `<leader>la` fix it.
+> **Diagnostic motions:** `]d` / `[d` move through diagnostics; `<leader>ld` opens a float for the current line.
 
 ---
 
-## Diagnostics
+## Trouble Lists
 
 | Keymap       | Description                  |
 | ------------ | ---------------------------- |
 | `]d`         | Next diagnostic              |
 | `[d`         | Previous diagnostic          |
-| `<leader>xx` | Trouble: project diagnostics |
-| `<leader>xb` | Trouble: buffer diagnostics  |
+| `<leader>xx` | Trouble: project problems    |
+| `<leader>xb` | Trouble: buffer problems     |
 | `<leader>xs` | Trouble: symbols             |
-| `<leader>xr` | Trouble: LSP references      |
+| `<leader>xr` | Trouble: references          |
 | `<leader>xq` | Trouble: quickfix list       |
 
-> **When to use Trouble vs float:** `<leader>ld` for quick inline read. `<leader>xx` when you need to triage multiple errors across files.
+> **When to use Trouble vs float:** `<leader>ld` for a quick single-item read. `<leader>xx` when you need to triage a list.
 
 ---
 
@@ -172,16 +171,6 @@
 | `<leader>gg`  | Open LazyGit           |
 | `<leader>gf`  | LazyGit current file   |
 | `ih`          | Text object: git hunk  |
-
----
-
-## Formatting & Comments
-
-| Keymap        | Mode          | Description           |
-| ------------- | ------------- | --------------------- |
-| `<leader>fm`  | Normal/Visual | Format file/selection |
-| `<leader>/`   | Normal/Visual | Toggle comment        |
-| `<C-/>`       | Normal/Visual | Toggle comment (fast) |
 
 ---
 
@@ -222,15 +211,6 @@
 | `<F12>`       | Toggle markdown render |
 
 ---
-
-## Utilities
-
-| Keymap       | Description       |
-| ------------ | ----------------- |
-| `<leader>u`  | Toggle undo tree  |
-
----
-
 
 ## Namespace Reference
 

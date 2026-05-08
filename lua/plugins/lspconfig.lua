@@ -55,20 +55,6 @@ return {
 						},
 					},
 				},
-				lua_ls = {
-					settings = {
-						Lua = {
-							runtime = { version = "LuaJIT" },
-							diagnostics = { globals = { "vim" } },
-							workspace = {
-								checkThirdParty = false,
-								library = { vim.env.VIMRUNTIME, vim.fn.stdpath("config") },
-							},
-							completion = { callSnippet = "Replace" },
-							telemetry = { enable = false },
-						},
-					},
-				},
 				basedpyright = {
 					settings = {
 						basedpyright = {
@@ -82,6 +68,31 @@ return {
 					end,
 				},
 			}
+
+			vim.lsp.config("*", {
+				capabilities = require("blink.cmp").get_lsp_capabilities(),
+			})
+
+			for name, cfg in pairs(servers) do
+				vim.lsp.config(name, cfg)
+				vim.lsp.enable(name)
+			end
+
+			vim.lsp.config("lua_ls", {
+				settings = {
+					Lua = {
+						runtime = { version = "LuaJIT" },
+						diagnostics = { globals = { "vim" } },
+						workspace = {
+							checkThirdParty = false,
+							library = { vim.env.VIMRUNTIME, vim.fn.stdpath("config") },
+						},
+						completion = { callSnippet = "Replace" },
+						telemetry = { enable = false },
+					},
+				},
+			})
+			vim.lsp.enable("lua_ls")
 
 			vim.api.nvim_create_autocmd("LspAttach", {
 				group = vim.api.nvim_create_augroup("lsp_attach", { clear = true }),
@@ -100,7 +111,6 @@ return {
 					map({ "n", "v" }, "<leader>la", vim.lsp.buf.code_action, "Code Action")
 					map("n", "<leader>lr", vim.lsp.buf.rename, "Rename")
 					map("n", "<leader>ld", vim.diagnostic.open_float, "Line Diagnostics")
-					map("n", "<leader>ls", "<cmd>LspRestart<CR>", "Restart")
 					map("n", "<leader>lh", function()
 						vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr }))
 					end, "Toggle Inlay Hints")
@@ -124,18 +134,10 @@ return {
 				end,
 			})
 
-			vim.lsp.config("*", {
-				capabilities = require("blink.cmp").get_lsp_capabilities(),
-			})
+			local ensure_installed = vim.tbl_keys(servers)
+			ensure_installed[#ensure_installed + 1] = "lua_ls"
 
-			for name, cfg in pairs(servers) do
-				vim.lsp.enable(name, cfg)
-			end
-
-			vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = ui.border })
-			vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signatureHelp, { border = ui.border })
-
-			require("mason-lspconfig").setup({ ensure_installed = vim.tbl_keys(servers) })
+			require("mason-lspconfig").setup({ ensure_installed = ensure_installed })
 		end,
 	},
 }

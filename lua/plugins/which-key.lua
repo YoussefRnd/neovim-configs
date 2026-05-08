@@ -12,7 +12,7 @@ return {
       { "<leader>l",  group = "lsp" },
       { "<leader>w",  group = "window" },
       { "<leader>b",  group = "buffer" },
-      { "<leader>x",  group = "trouble" },
+      { "<leader>x",  group = "problems" },
       { "<leader>s",  group = "session" },
       { "<leader>m",  group = "markdown" },
     },
