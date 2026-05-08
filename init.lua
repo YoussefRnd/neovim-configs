@@ -2,11 +2,10 @@ if vim.loader then
 	vim.loader.enable()
 end
 
-require("options")
-require("keymaps")
-require("autocmds")
+require("core.options")
+require("core.keymaps")
+require("core.autocmds")
 
--- Install lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.uv.fs_stat(lazypath) then
 	vim.system({
@@ -22,7 +21,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup("plugins", {
 	ui = {
-		border = "rounded",
+		border = require("core.ui").border,
 	},
 	change_detection = {
 		notify = false,

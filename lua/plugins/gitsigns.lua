@@ -1,58 +1,70 @@
 return {
   "lewis6991/gitsigns.nvim",
   event = { "BufReadPre", "BufNewFile" },
-  opts = {
-    signs = {
-      add = { text = "│" },
-      change = { text = "│" },
-      delete = { text = "_" },
-      topdelete = { text = "‾" },
-      changedelete = { text = "~" },
-      untracked = { text = "┆" },
-    },
-    current_line_blame_opts = {
-      delay = 500,
-    },
-    on_attach = function(bufnr)
-      local gs = require("gitsigns")
+  opts = function()
+    local ui = require("core.ui")
+    return {
+      signs = {
+        add = { text = ui.get_icon("git", "added") },
+        change = { text = ui.get_icon("git", "modified") },
+        delete = { text = ui.get_icon("git", "removed") },
+        topdelete = { text = ui.get_icon("git", "removed") },
+        changedelete = { text = ui.get_icon("git", "modified") },
+        untracked = { text = ui.get_icon("git", "untracked") },
+      },
+      current_line_blame_opts = {
+        delay = 500,
+      },
+      on_attach = function(bufnr)
+        local gs = require("gitsigns")
 
-      local function map(mode, l, r, opts)
-        opts = opts or {}
-        opts.buffer = bufnr
-        vim.keymap.set(mode, l, r, opts)
-      end
+        local function map(mode, l, r, opts)
+          opts = opts or {}
+          opts.buffer = bufnr
+          vim.keymap.set(mode, l, r, opts)
+        end
 
-      -- Navigation
-      map("n", "]c", function()
-        if vim.wo.diff then return "]c" end
-        vim.schedule(function() gs.nav_hunk('next') end)
-        return "<Ignore>"
-      end, { expr = true, desc = "Next git hunk" })
+        map("n", "]c", function()
+          if vim.wo.diff then
+            return "]c"
+          end
+          vim.schedule(function()
+            gs.nav_hunk("next")
+          end)
+          return "<Ignore>"
+        end, { expr = true, desc = "Next git hunk" })
 
-      map("n", "[c", function()
-        if vim.wo.diff then return "[c" end
-        vim.schedule(function() gs.nav_hunk('prev') end)
-        return "<Ignore>"
-      end, { expr = true, desc = "Previous git hunk" })
+        map("n", "[c", function()
+          if vim.wo.diff then
+            return "[c"
+          end
+          vim.schedule(function()
+            gs.nav_hunk("prev")
+          end)
+          return "<Ignore>"
+        end, { expr = true, desc = "Previous git hunk" })
 
-      -- Actions
-      map("n", "<leader>gs", gs.stage_hunk, { desc = "Stage hunk" })
-      map("n", "<leader>gr", gs.reset_hunk, { desc = "Reset hunk" })
-      map("v", "<leader>gs", function() gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") }) end,
-        { desc = "Stage hunk" })
-      map("v", "<leader>gr", function() gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") }) end,
-        { desc = "Reset hunk" })
-      map("n", "<leader>gS", gs.stage_buffer, { desc = "Stage buffer" })
-      map("n", "<leader>gu", gs.undo_stage_hunk, { desc = "Undo stage hunk" })
+        map("n", "<leader>gs", gs.stage_hunk, { desc = "Stage hunk" })
+        map("n", "<leader>gr", gs.reset_hunk, { desc = "Reset hunk" })
+        map("v", "<leader>gs", function()
+          gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
+        end, { desc = "Stage hunk" })
+        map("v", "<leader>gr", function()
+          gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
+        end, { desc = "Reset hunk" })
+        map("n", "<leader>gS", gs.stage_buffer, { desc = "Stage buffer" })
+        map("n", "<leader>gu", gs.undo_stage_hunk, { desc = "Undo stage hunk" })
 
-      map("n", "<leader>gR", gs.reset_buffer, { desc = "Reset buffer" })
-      map("n", "<leader>gp", gs.preview_hunk, { desc = "Preview hunk" })
-      map("n", "<leader>gb", gs.toggle_current_line_blame, { desc = "Toggle line blame" })
-      map("n", "<leader>gd", gs.diffthis, { desc = "Diff this" })
-      map("n", "<leader>gD", function() gs.diffthis("~") end, { desc = "Diff this ~" })
+        map("n", "<leader>gR", gs.reset_buffer, { desc = "Reset buffer" })
+        map("n", "<leader>gp", gs.preview_hunk, { desc = "Preview hunk" })
+        map("n", "<leader>gb", gs.toggle_current_line_blame, { desc = "Toggle line blame" })
+        map("n", "<leader>gd", gs.diffthis, { desc = "Diff this" })
+        map("n", "<leader>gD", function()
+          gs.diffthis("~")
+        end, { desc = "Diff this ~" })
 
-      -- Text object
-      map({ "o", "x" }, "ih", gs.select_hunk, { desc = "Select git hunk" })
-    end,
-  },
+        map({ "o", "x" }, "ih", gs.select_hunk, { desc = "Select git hunk" })
+      end,
+    }
+  end,
 }

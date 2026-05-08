@@ -13,16 +13,16 @@ return {
 		reverse = false,
 		modes = {
 			diagnostics = {
-				win = { type = "float", border = "rounded", position = { row = 2, col = 5 }, size = { width = 80, height = 12 } },
+				win = { type = "float", border = require("core.ui").border, position = { row = 2, col = 5 }, size = { width = 80, height = 12 } },
 			},
 			symbols = {
-				win = { type = "float", border = "rounded", position = { row = 2, col = 5 }, size = { width = 60, height = 10 } },
+				win = { type = "float", border = require("core.ui").border, position = { row = 2, col = 5 }, size = { width = 60, height = 10 } },
 			},
 			lsp_references = {
-				win = { type = "float", border = "rounded", position = { row = 2, col = 5 }, size = { width = 80, height = 12 } },
+				win = { type = "float", border = require("core.ui").border, position = { row = 2, col = 5 }, size = { width = 80, height = 12 } },
 			},
 			qflist = {
-				win = { type = "float", border = "rounded", position = { row = 2, col = 5 }, size = { width = 80, height = 12 } },
+				win = { type = "float", border = require("core.ui").border, position = { row = 2, col = 5 }, size = { width = 80, height = 12 } },
 			},
 		},
 	},

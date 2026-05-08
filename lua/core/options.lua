@@ -1,8 +1,6 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
--- UI
-vim.opt.termguicolors = true
 vim.opt.cursorline = true
 vim.opt.fillchars = { eob = " " }
 vim.opt.laststatus = 3
@@ -17,62 +15,44 @@ vim.opt.showmode = false
 vim.opt.sidescrolloff = 8
 vim.opt.signcolumn = "yes"
 vim.opt.smoothscroll = true
-vim.opt.winborder = "rounded"
+local border = require("core.ui").border
+vim.opt.winborder = border
 vim.opt.winminwidth = 5
 vim.opt.wrap = false
 
--- Editing
-vim.opt.completeopt = "menu,menuone,noselect"
 vim.opt.expandtab = true
-vim.opt.formatoptions = "jcroqlnt" -- jcroqlnt is much more robust for wrapping/comments (like LazyVim)
+vim.opt.formatoptions = "jcroqlnt"
 vim.opt.shiftwidth = 2
-vim.opt.smartindent = true -- Set to true, treesitter doesn't always handle it
+vim.opt.smartindent = true
 vim.opt.tabstop = 2
 vim.opt.virtualedit = "block"
 
--- Search
 vim.opt.grepformat = "%f:%l:%c:%m"
 vim.opt.grepprg = "rg --vimgrep"
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
--- Behavior
 vim.opt.autowrite = true
 vim.opt.confirm = true
 vim.opt.clipboard = "unnamedplus"
 vim.opt.inccommand = "nosplit"
 vim.opt.jumpoptions = "view"
-vim.opt.mouse = "a"
-vim.opt.shortmess:append({ W = true, I = true, c = true, C = true })
+vim.opt.shortmess:append("WICc")
 vim.opt.splitbelow = true
 vim.opt.splitkeep = "screen"
 vim.opt.splitright = true
 vim.opt.timeoutlen = 500
 vim.opt.updatetime = 200
 
--- Session
 vim.opt.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
--- Spell
 vim.opt.spelllang = "en_us"
 vim.opt.spelloptions = "camel"
 
--- Undo
-vim.opt.undodir = vim.fn.stdpath("data") .. "/undodir"
 vim.opt.undofile = true
 vim.opt.undolevels = 10000
-vim.fn.mkdir(vim.fn.stdpath("data") .. "/undodir", "p")
 
--- Diagnostics
 vim.diagnostic.config({
-	signs = {
-		text = {
-			[vim.diagnostic.severity.ERROR] = " ",
-			[vim.diagnostic.severity.WARN] = " ",
-			[vim.diagnostic.severity.HINT] = "󰠠 ",
-			[vim.diagnostic.severity.INFO] = " ",
-		},
-	},
 	virtual_text = { prefix = "●" },
 	update_in_insert = false,
 	underline = true,
@@ -80,7 +60,7 @@ vim.diagnostic.config({
 	float = {
 		focusable = false,
 		style = "minimal",
-		border = "rounded",
+		border = border,
 		source = true,
 		header = "",
 		prefix = "",

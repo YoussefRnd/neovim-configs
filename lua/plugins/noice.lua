@@ -5,10 +5,6 @@ return {
 		"MunifTanjim/nui.nvim",
 		"rcarriga/nvim-notify",
 	},
-	-- noice.setup() automatically replaces vim.notify with its own handler.
-	-- Do NOT reassign vim.notify afterwards: that would bypass noice's routing
-	-- and send all notifications straight to raw nvim-notify, skipping
-	-- noice's filtering, history, and UI.
 	opts = {
 		lsp = {
 			override = {
@@ -19,13 +15,13 @@ return {
 		views = {
 			cmdline_popup = {
 				border = {
-					style = "rounded",
+					style = require("core.ui").border,
 					padding = { 0, 1 },
 				},
 			},
 			popupmenu = {
 				border = {
-					style = "rounded",
+					style = require("core.ui").border,
 				},
 			},
 		},

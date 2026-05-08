@@ -49,12 +49,13 @@ return {
 	config = function()
 		local telescope = require("telescope")
 		local actions = require("telescope.actions")
+		local ui = require("core.ui")
 
 		telescope.setup({
 			defaults = {
 				path_display = { "truncate" },
 				sorting_strategy = "ascending",
-				prompt_prefix = " ",
+				prompt_prefix = ui.get_icon("ui", "search"),
 				selection_caret = " ",
 				layout_strategy = "horizontal",
 				layout_config = {

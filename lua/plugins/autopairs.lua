@@ -5,14 +5,14 @@ return {
     local autopairs = require("nvim-autopairs")
 
     autopairs.setup({
-      check_ts = true, -- Use treesitter to check for pairs
+      check_ts = true,
       ts_config = {
-        lua = { "string" }, -- Don't add pairs in lua string treesitter nodes
+        lua = { "string" },
         javascript = { "template_string" },
       },
       disable_filetype = { "TelescopePrompt", "vim" },
       fast_wrap = {
-        map = "<M-e>", -- Alt+e to fast wrap
+        map = "<M-e>",
         chars = { "{", "[", "(", '"', "'" },
         pattern = [=[[%'%"%>%]%)%}%,]]=],
         end_key = "$",

@@ -5,7 +5,7 @@ return {
     delay = 200,
     icons = { mappings = false },
     layout = { align = "left", spacing = 2 },
-    win = { border = "rounded" },
+    win = { border = require("core.ui").border },
     spec = {
       { "<leader>f",  group = "find" },
       { "<leader>g",  group = "git" },
