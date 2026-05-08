@@ -2,16 +2,7 @@ return {
   "lewis6991/gitsigns.nvim",
   event = { "BufReadPre", "BufNewFile" },
   opts = function()
-    local ui = require("core.ui")
     return {
-      signs = {
-        add = { text = ui.get_icon("git", "added") },
-        change = { text = ui.get_icon("git", "modified") },
-        delete = { text = ui.get_icon("git", "removed") },
-        topdelete = { text = ui.get_icon("git", "removed") },
-        changedelete = { text = ui.get_icon("git", "modified") },
-        untracked = { text = ui.get_icon("git", "untracked") },
-      },
       current_line_blame_opts = {
         delay = 500,
       },
