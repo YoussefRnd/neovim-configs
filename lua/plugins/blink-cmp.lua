@@ -1,3 +1,5 @@
+local ui = require("core.ui")
+
 return {
   "saghen/blink.cmp",
   version = "*",
@@ -28,14 +30,14 @@ return {
         auto_brackets = { enabled = true },
       },
       menu = {
-        border = "rounded",
+        border = ui.border,
         winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None",
       },
       documentation = {
         auto_show = true,
         auto_show_delay_ms = 200,
         window = {
-          border = "rounded",
+          border = ui.border,
           winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None",
         },
       },
@@ -43,7 +45,7 @@ return {
 
     signature = {
       window = {
-        border = "rounded",
+        border = ui.border,
         winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None",
       },
     },

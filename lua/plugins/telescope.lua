@@ -67,7 +67,6 @@ return {
 					height = 0.8,
 				},
 				border = true,
-				borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
 				results_title = false,
 				mappings = {
 					i = {

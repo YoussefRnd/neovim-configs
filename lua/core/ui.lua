@@ -69,9 +69,9 @@ M.text_icons = {
 }
 
 function M.get_icon(category, name)
-	local table = M.icons_enabled and M.icons or M.text_icons
-	if table[category] and table[category][name] then
-		return table[category][name]
+	local icon_table = M.icons_enabled and M.icons or M.text_icons
+	if icon_table[category] and icon_table[category][name] then
+		return icon_table[category][name]
 	end
 	local status, mini_icons = pcall(require, "mini.icons")
 	if status then
@@ -81,10 +81,16 @@ function M.get_icon(category, name)
 	return ""
 end
 
+local function add_glyphs(target, source)
+	for name, glyph in pairs(source) do
+		target[name] = { glyph = glyph }
+	end
+end
+
 -- mini.icons integration table
 M.mini_icons_opts = { lsp = {}, default = {} }
-for name, glyph in pairs(M.icons.kinds) do M.mini_icons_opts.lsp[name] = { glyph = glyph } end
-for name, glyph in pairs(M.icons.lsp) do M.mini_icons_opts.lsp[name] = { glyph = glyph } end
-for name, glyph in pairs(M.icons.ui) do M.mini_icons_opts.default[name] = { glyph = glyph } end
+add_glyphs(M.mini_icons_opts.lsp, M.icons.kinds)
+add_glyphs(M.mini_icons_opts.lsp, M.icons.lsp)
+add_glyphs(M.mini_icons_opts.default, M.icons.ui)
 
 return M
